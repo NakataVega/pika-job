@@ -12,7 +12,7 @@ class aspirantes extends Model {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['correo'],
+      required: ['nombre'],
 
       properties: {
         text: { type: 'string' }
