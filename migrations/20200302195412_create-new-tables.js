@@ -4,8 +4,8 @@ exports.up = async function (knex) {
         table.increments('id');
         table.string('email').unique();
         table.string('password');
-        table.integer('id_aspirante').unsigned().notNullable();
-        table.integer('id_organizacion').unsigned().notNullable();
+        table.integer('id_aspirante').unsigned();
+        table.integer('id_organizacion').unsigned();
         table.timestamp('createdAt');
         table.timestamp('updatedAt');
     });
