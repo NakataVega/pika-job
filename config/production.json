@@ -1,4 +1,6 @@
 {
-  "host": "pika-job-app.feathersjs.com",
-  "port": "PORT"
+  "mysql": {
+    "client": "mysql2",
+    "connection": "mysql://root:admin@localhost:3306/pika_job"
+  }
 }

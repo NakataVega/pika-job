@@ -27,9 +27,10 @@
     "test": "npm run lint && npm run jest",
     "lint": "eslint src/. test/. --config .eslintrc.json",
     "dev": "nodemon src/",
-    "start": "node src/",
+    "start": "env NODE_ENV=production node src/",
     "jest": "jest  --forceExit",
-    "db": "knex"
+    "db": "knex",
+    "prod-db": "env NODE_ENV=production knex"
   },
   "standard": {
     "env": [

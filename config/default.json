@@ -30,6 +30,6 @@
   },
   "mysql": {
     "client": "mysql2",
-    "connection": "mysql://root:admin@localhost:3306/pika_job"
+    "connection": "mysql://root:@localhost:3306/pika_job"
   }
 }
