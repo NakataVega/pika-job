@@ -30,28 +30,5 @@ class cursos extends Model {
 }
 
 module.exports = function (app) {
-  const db = app.get('knex');
-
-  db.schema.hasTable('cursos').then(exists => {
-    if (!exists) {
-      db.schema.createTable('cursos', table => {
-        table.increments('id');
-        table.integer('id_user').unsigned().notNullable();
-        table.foreign('id_user').references('id').inTable('aspirantes');
-        table.string('nombre_curso');
-        table.string('institucion');
-        table.date('fecha_inicio');
-        table.date('fecha_fin');
-        table.integer('duracion');
-        table.string('descripcion');
-        table.timestamp('createdAt');
-        table.timestamp('updatedAt');
-      })
-        .then(() => console.log('Created cursos table')) // eslint-disable-line no-console
-        .catch(e => console.error('Error creating cursos table', e)); // eslint-disable-line no-console
-    }
-  })
-    .catch(e => console.error('Error creating cursos table', e)); // eslint-disable-line no-console
-
   return cursos;
 };

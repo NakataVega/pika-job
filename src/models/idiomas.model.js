@@ -30,24 +30,5 @@ class idiomas extends Model {
 }
 
 module.exports = function (app) {
-  const db = app.get('knex');
-
-  db.schema.hasTable('idiomas').then(exists => {
-    if (!exists) {
-      db.schema.createTable('idiomas', table => {
-        table.increments('id');
-        table.integer('id_user').unsigned().notNullable();
-        table.foreign('id_user').references('id').inTable('aspirantes');
-        table.string('idioma');
-        table.float('porcentaje');
-        table.timestamp('createdAt');
-        table.timestamp('updatedAt');
-      })
-        .then(() => console.log('Created idiomas table')) // eslint-disable-line no-console
-        .catch(e => console.error('Error creating idiomas table', e)); // eslint-disable-line no-console
-    }
-  })
-    .catch(e => console.error('Error creating idiomas table', e)); // eslint-disable-line no-console
-
   return idiomas;
 };

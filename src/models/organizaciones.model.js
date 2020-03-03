@@ -30,27 +30,5 @@ class organizaciones extends Model {
 }
 
 module.exports = function (app) {
-  const db = app.get('knex');
-
-  db.schema.hasTable('organizaciones').then(exists => {
-    if (!exists) {
-      db.schema.createTable('organizaciones', table => {
-        table.increments('id');
-        table.string('nombre_orga');
-        table.string('rfc');
-        table.text('domicilio');
-        table.text('descripcion');
-        table.string('nombre_reclutador');
-        table.string('correo_reclutador');
-        table.string('password');
-        table.timestamp('createdAt');
-        table.timestamp('updatedAt');
-      })
-        .then(() => console.log('Created organizaciones table')) // eslint-disable-line no-console
-        .catch(e => console.error('Error creating organizaciones table', e)); // eslint-disable-line no-console
-    }
-  })
-    .catch(e => console.error('Error creating organizaciones table', e)); // eslint-disable-line no-console
-
   return organizaciones;
 };

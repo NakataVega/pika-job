@@ -18,9 +18,10 @@ Getting up and running is as easy as 1, 2, 3.
     npm install
     ```
 
-3. Start your app
+3. Init database and start app
 
     ```
+    npm run db -- migrate:latest
     npm start
     ```
 
