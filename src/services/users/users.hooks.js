@@ -4,12 +4,24 @@ const {
   hashPassword, protect
 } = require('@feathersjs/authentication-local').hooks;
 
+const getAspirantData = (context) => {
+  const {email, password, ...aspirante } = context.data
+  context.data = { email, password }
+  context.params.aspirante = aspirante
+}
+
+const createAspirant = async(context) =>{
+  const aspirante = await context.app.service('aspirantes').create(context.params.aspirante)
+  console.log(aspirante)
+  await context.app.service('users').patch(context.result.id, { id_aspirante: aspirante.id })
+}
+
 module.exports = {
   before: {
     all: [],
     find: [ authenticate('jwt') ],
     get: [ authenticate('jwt') ],
-    create: [ hashPassword('password') ],
+    create: [ hashPassword('password'), getAspirantData],
     update: [ hashPassword('password'),  authenticate('jwt') ],
     patch: [ hashPassword('password'),  authenticate('jwt') ],
     remove: [ authenticate('jwt') ]
@@ -23,7 +35,7 @@ module.exports = {
     ],
     find: [],
     get: [],
-    create: [],
+    create: [createAspirant,protect('password')],
     update: [],
     patch: [],
     remove: []
