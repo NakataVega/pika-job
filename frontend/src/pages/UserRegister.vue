@@ -78,13 +78,20 @@ export default {
   },
   methods: {
     async onSubmit () {
-      const { data: user } = await this.$axios.post('/users', {
+      const { data: user, error } = await this.$axios.post('/users', {
         nombre: this.firstName,
         apellido_paterno: this.lastName1,
         apellido_materno: this.lastName2,
         email: this.email,
         password: this.password
       })
+      if (error && error.response && error.response.data) {
+        this.$q.notify({
+          type: 'negative',
+          position: 'top-right',
+          message: error.response.data.errors.email
+        })
+      }
       if (!user) return
       const { data } = await this.$axios.post('/authentication', {
         strategy: 'local',
