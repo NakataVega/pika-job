@@ -58,6 +58,14 @@ export default {
         this.$axios.defaults.headers.common.Authorization = `Bearer ${token}`
         await this.$store.dispatch('login', { user, token, userId: user.id })
         this.$router.push('/')
+      } else {
+        this.$q.notify({
+          type: 'negative',
+          position: 'top-right',
+          group: false,
+          timeout: 2500,
+          message: 'Datos incorrectos'
+        })
       }
     }
   }

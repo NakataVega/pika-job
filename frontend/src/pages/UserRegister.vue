@@ -89,6 +89,8 @@ export default {
         this.$q.notify({
           type: 'negative',
           position: 'top-right',
+          group: false,
+          timeout: 2500,
           message: error.response.data.errors.email
         })
       }

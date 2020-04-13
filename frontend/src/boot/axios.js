@@ -6,7 +6,8 @@ const api = host.includes('localhost') ? 'http://localhost:3030' : origin
 
 axios.defaults.baseURL = api
 axios.interceptors.response.use(({ data }) => ({ data, error: null }), (error) => {
-  if (error.response && error.response.status === 401 && pathname !== '/login') {
+  console.log(pathname)
+  if (error.response && error.response.status === 401 && pathname === '/login') {
     localStorage.clear()
     document.location.reload()
   }
