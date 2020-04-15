@@ -9,6 +9,9 @@
 
 <script>
 export default {
-  name: 'PageIndex'
+  name: 'PageIndex',
+  mounted () {
+    if (this.$store.state.user.id_organizacion) this.$router.push('organizacion')
+  }
 }
 </script>

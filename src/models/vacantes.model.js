@@ -12,7 +12,7 @@ class vacantes extends Model {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['text'],
+      required: ['nombre_vacante'],
 
       properties: {
         text: { type: 'string' }

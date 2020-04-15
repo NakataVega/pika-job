@@ -6,10 +6,14 @@ const {
   hashPassword, protect
 } = require('@feathersjs/authentication-local').hooks;
 
-const getAspirantData = (context) => {
-  const {email, password, ...aspirante } = context.data
+const getDataByUserType = (context) => {
+  const {email, password, userType, ...data } = context.data
   context.data = { email, password }
-  context.params.aspirante = aspirante
+  if (userType === 'organizacion'){
+    context.params.organizacion = data;
+  } else {
+    context.params.aspirante = data;
+  }
 }
 
 const validateUniqueEmail = async(context) => {
@@ -25,10 +29,20 @@ const validateUniqueEmail = async(context) => {
   }
 }
 
-const createAspirant = async(context) =>{
-  const aspirante = await context.app.service('aspirantes').create(context.params.aspirante)
-  console.log(aspirante)
-  await context.app.service('users').patch(context.result.id, { id_aspirante: aspirante.id })
+const createUserByType = async(context) =>{
+  if (context.params.aspirante){
+    const aspirante = await context.app.service('aspirantes').create(context.params.aspirante);
+    console.log(aspirante);
+    await context.app.service('users').patch(context.result.id, { id_aspirante: aspirante.id });
+    context.result.id_aspirante = aspirante.id;
+  } else {
+    const organizacion = await context.app.service('organizaciones').create(context.params.organizacion);
+    console.log(organizacion);
+    await context.app.service('users').patch(context.result.id, { id_organizacion: organizacion.id });
+    context.result.id_organizacion = organizacion.id;
+  }
+  context.params.aspirante = null;
+  context.params.organizacion = null;
 }
 
 module.exports = {
@@ -36,7 +50,7 @@ module.exports = {
     all: [],
     find: [ authenticate('jwt') ],
     get: [ authenticate('jwt') ],
-    create: [ hashPassword('password'), validateUniqueEmail, getAspirantData],
+    create: [ hashPassword('password'), validateUniqueEmail, getDataByUserType],
     update: [ hashPassword('password'),  authenticate('jwt') ],
     patch: [ hashPassword('password'),  authenticate('jwt') ],
     remove: [ authenticate('jwt') ]
@@ -50,7 +64,7 @@ module.exports = {
     ],
     find: [],
     get: [],
-    create: [createAspirant,protect('password')],
+    create: [createUserByType,protect('password')],
     update: [],
     patch: [],
     remove: []

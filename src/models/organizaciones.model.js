@@ -12,7 +12,7 @@ class organizaciones extends Model {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['text'],
+      required: [],
 
       properties: {
         text: { type: 'string' }
