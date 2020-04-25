@@ -1,6 +1,11 @@
 <template>
   <q-page padding>
-    <h3>Iniciar sesión</h3>
+    <img
+      alt="Pika-job logo"
+      src="~assets/pikajob-logo.png"
+      style="max-height: 2oopx; max-width: 50%; margin-left: auto; margin-right:auto; display: block;"
+    >
+    <h3 style="margin-top: 10px;">Iniciar sesión</h3>
     <q-form
       @submit="onSubmit"
       class="q-gutter-md"
