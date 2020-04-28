@@ -2,24 +2,23 @@
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('layouts/AppLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') },
-      {
-        path: 'organizacion',
-        component: () => import('layouts/OrganizacionAdminLayout.vue'),
-        children: [
-          { path: '', component: () => import('pages/OrganizacionIndex.vue') }
-        ]
-      }
+      { path: 'perfil', component: () => import('pages/aspirantes/perfil.vue') }
     ]
   },
   {
     path: '/login',
-    component: () => import('layouts/Login.vue'),
+    component: () => import('layouts/CenteredPanelLayout.vue'),
     children: [
-      { path: 'register', component: () => import('pages/UserRegister.vue') },
-      { path: '', component: () => import('pages/UserLogin.vue') }
+      { path: '', component: () => import('pages/Login.vue') }
+    ]
+  },
+  {
+    path: '/register',
+    component: () => import('layouts/CenteredPanelLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/Register.vue') }
     ]
   }
 ]

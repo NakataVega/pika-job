@@ -30,7 +30,7 @@
           header
           class="text-grey-8"
         >
-          Essential Links
+          Menú
         </q-item-label>
         <EssentialLink
           v-for="link in essentialLinks"
@@ -61,10 +61,10 @@ export default {
       leftDrawerOpen: false,
       essentialLinks: [
         {
-          title: 'Docs',
-          caption: 'quasar.dev',
-          icon: 'school',
-          link: 'https://quasar.dev'
+          title: 'Perfil',
+          caption: 'Tu información personal',
+          icon: 'person',
+          link: '/perfil'
         },
         {
           title: 'Github',
