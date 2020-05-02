@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
-      <q-toolbar>
+      <q-toolbar class="bg-yellow-14 text-black">
         <q-btn
           flat
           dense
@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          Pika Job
         </q-toolbar-title>
 
         <div @click="logout">Cerrar sesión de {{ $store.state.user.email }}</div>
@@ -23,20 +23,15 @@
       v-model="leftDrawerOpen"
       show-if-above
       bordered
-      content-class="bg-grey-1"
+      content-class="bg-grey-9"
     >
       <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
-          Menú
-        </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+        <q-item clickable to="/perfil" v-ripple>
+          <q-item-section avatar>
+            <q-icon color="yellow-14" name="person" />
+          </q-item-section>
+          <q-item-section style="color:#ffd500; font-weight:bold;">Perfil</q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
@@ -47,56 +42,14 @@
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink'
+// import EssentialLink from 'components/EssentialLink'
 
 export default {
   name: 'MainLayout',
 
-  components: {
-    EssentialLink
-  },
-
   data () {
     return {
-      leftDrawerOpen: false,
-      essentialLinks: [
-        {
-          title: 'Perfil',
-          caption: 'Tu información personal',
-          icon: 'person',
-          link: '/perfil'
-        },
-        {
-          title: 'Github',
-          caption: 'github.com/quasarframework',
-          icon: 'code',
-          link: 'https://github.com/quasarframework'
-        },
-        {
-          title: 'Discord Chat Channel',
-          caption: 'chat.quasar.dev',
-          icon: 'chat',
-          link: 'https://chat.quasar.dev'
-        },
-        {
-          title: 'Forum',
-          caption: 'forum.quasar.dev',
-          icon: 'record_voice_over',
-          link: 'https://forum.quasar.dev'
-        },
-        {
-          title: 'Twitter',
-          caption: '@quasarframework',
-          icon: 'rss_feed',
-          link: 'https://twitter.quasar.dev'
-        },
-        {
-          title: 'Facebook',
-          caption: '@QuasarFramework',
-          icon: 'public',
-          link: 'https://facebook.quasar.dev'
-        }
-      ]
+      leftDrawerOpen: false
     }
   },
   methods: {

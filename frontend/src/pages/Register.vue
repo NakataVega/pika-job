@@ -1,5 +1,5 @@
 <template>
-  <q-card>
+  <q-card class="bg-grey-4">
     <q-card-section>
       <img
         alt="Pika-job logo"
@@ -59,8 +59,8 @@
         </q-input>
 
         <div class="q-pa-md q-gutter-sm">
-          <q-btn label="Registrarme" type="submit" color="primary"/>
-          <q-btn label="Ya tengo una cuenta" type="button" color="secondary" to="/login"/>
+          <q-btn label="Registrarme" type="submit" class="bg-yellow-14"/>
+          <q-btn label="Ya tengo cuenta" type="button" class="bg-grey-9 text-yellow-14" to="/login"/>
         </div>
       </q-form>
     </q-card-section>
