@@ -79,9 +79,9 @@ export default {
     return {
       organizacion: this.organizacion,
       cargo: this.cargo,
-      fecha_inicio: this.fecha_inicio,
+      fecha_inicio: new Date().getFullYear() + '/' + (new Date().getMonth() + 1).toString().padStart(2, '0') + '/' + new Date().getDate(),
       checkbox: true,
-      fecha_fin: this.fecha_fin,
+      fecha_fin: new Date().getFullYear() + '/' + (new Date().getMonth() + 1).toString().padStart(2, '0') + '/' + new Date().getDate(),
       funciones: this.funciones
     }
   },
@@ -104,6 +104,7 @@ export default {
         timeout: 2500,
         message: '¡Experiencia guardada!'
       })
+      this.$router.push('../experiencias-laborales')
     }
   }
 }
