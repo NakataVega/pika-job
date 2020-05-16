@@ -9,7 +9,7 @@ axios.interceptors.response.use(({ data }) => ({ data, error: null }), (error) =
   console.log(pathname)
   if (error.response && error.response.status === 401 && pathname === '/login') {
     localStorage.clear()
-    document.location.reload()
+    // document.location.reload()
   }
   return Promise.resolve({ error, data: null })
 })

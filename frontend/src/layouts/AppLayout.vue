@@ -26,12 +26,20 @@
       content-class="bg-grey-9"
     >
       <q-list>
-        <q-item clickable to="/perfil" v-ripple>
-          <q-item-section avatar>
-            <q-icon color="yellow-14" name="person" />
-          </q-item-section>
-          <q-item-section style="color:#ffd500; font-weight:bold;">Perfil</q-item-section>
-        </q-item>
+        <template v-if="$store.state.user.id_aspirante">
+          <q-item clickable to="/perfil" v-ripple>
+            <q-item-section avatar>
+              <q-icon color="yellow-14" name="person" />
+            </q-item-section>
+            <q-item-section style="color:#ffd500; font-weight:bold;">Perfil</q-item-section>
+          </q-item>
+          <q-item clickable to="/experiencias-laborales" v-ripple>
+            <q-item-section avatar>
+              <q-icon color="yellow-14" name="work" />
+            </q-item-section>
+            <q-item-section style="color:#ffd500; font-weight:bold;">Experiencia laboral</q-item-section>
+          </q-item>
+        </template>
       </q-list>
     </q-drawer>
 

@@ -4,7 +4,16 @@ const routes = [
     path: '/',
     component: () => import('layouts/AppLayout.vue'),
     children: [
-      { path: 'perfil', component: () => import('pages/aspirantes/perfil.vue') }
+      { path: 'perfil', component: () => import('pages/aspirantes/perfil.vue') },
+      {
+        path: 'experiencias-laborales',
+        component: () => import('layouts/CrudLayout.vue'),
+        children: [
+          { path: '', component: () => import('pages/aspirantes/experiencias-laborales/lista.vue') },
+          { path: 'crear', component: () => import('pages/aspirantes/experiencias-laborales/crear.vue') },
+          { path: 'editar/:id', component: () => import('pages/aspirantes/experiencias-laborales/editar.vue') }
+        ]
+      }
     ]
   },
   {

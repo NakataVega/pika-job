@@ -1,5 +1,5 @@
 <template>
-  <q-card class="bg-grey-5">
+  <q-card class="bg-grey-4">
     <q-card-section>
       <img
         alt="Pika-job logo"

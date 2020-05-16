@@ -164,6 +164,12 @@ export default {
       })
       console.log(user)
       this.$store.commit('setState', { user })
+      this.$q.notify({
+        position: 'bottom-right',
+        group: false,
+        timeout: 2500,
+        message: '¡Cambios realizados!'
+      })
     }
   },
   async mounted () {
