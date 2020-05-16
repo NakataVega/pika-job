@@ -88,7 +88,7 @@ export default {
   methods: {
     async onSubmit () {
       const { id_aspirante } = this.$store.state.user
-      if (this.checkbox) this.fecha_fin = ''
+      if (this.checkbox) this.fecha_fin = null
       const { data } = await this.$axios.post('/experiencias-laborales', {
         id_user: id_aspirante,
         titulo_expe: this.cargo,

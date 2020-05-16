@@ -12,7 +12,7 @@ class experienciasLaborales extends Model {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['text'],
+      required: ['titulo_expe','organizacion','fecha_inicio'],
 
       properties: {
         text: { type: 'string' }
