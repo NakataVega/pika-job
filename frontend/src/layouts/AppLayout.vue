@@ -11,11 +11,11 @@
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
 
-        <q-toolbar-title>
-          Pika Job
+        <q-toolbar-title style="font-weight: bold;">
+          PikaJob
         </q-toolbar-title>
 
-        <div @click="logout">Cerrar sesión de {{ $store.state.user.email }}</div>
+        <!--div @click="logout">Cerrar sesión de {{ $store.state.user.email }}</div-->
       </q-toolbar>
     </q-header>
 
@@ -35,11 +35,23 @@
           </q-item>
           <q-item clickable to="/experiencias-laborales" v-ripple>
             <q-item-section avatar>
-              <q-icon color="yellow-14" name="work" />
+              <q-icon color="yellow-14" name="business_center" />
             </q-item-section>
             <q-item-section style="color:#ffd500; font-weight:bold;">Experiencia laboral</q-item-section>
           </q-item>
+          <q-item clickable to="/formaciones-academicas" v-ripple>
+            <q-item-section avatar>
+              <q-icon color="yellow-14" name="school" />
+            </q-item-section>
+            <q-item-section style="color:#ffd500; font-weight:bold;">Formación académica</q-item-section>
+          </q-item>
         </template>
+        <q-item clickable  @click="logout" v-ripple>
+          <q-item-section avatar>
+            <q-icon color="yellow-14" name="arrow_back" />
+          </q-item-section>
+          <q-item-section style="color:#ffd500; font-weight:bold;">Cerrar sesión  de {{ $store.state.user.email }}</q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 

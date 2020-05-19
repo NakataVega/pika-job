@@ -12,7 +12,7 @@ class formacionesAcademicas extends Model {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['text'],
+      required: ['titulo_formacion','institucion','fecha_inicio'],
 
       properties: {
         text: { type: 'string' }

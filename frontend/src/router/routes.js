@@ -13,6 +13,14 @@ const routes = [
           { path: 'crear', component: () => import('pages/aspirantes/experiencias-laborales/crear.vue') },
           { path: 'editar/:id', component: () => import('pages/aspirantes/experiencias-laborales/editar.vue') }
         ]
+      },
+      {
+        path: 'formaciones-academicas',
+        component: () => import('layouts/CrudLayout.vue'),
+        children: [
+          { path: '', component: () => import('pages/aspirantes/formaciones-academicas/lista.vue') },
+          { path: 'crear', component: () => import('pages/aspirantes/formaciones-academicas/crear.vue') }
+        ]
       }
     ]
   },
