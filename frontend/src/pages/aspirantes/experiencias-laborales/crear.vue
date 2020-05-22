@@ -74,14 +74,17 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   data () {
     return {
       organizacion: this.organizacion,
       cargo: this.cargo,
-      fecha_inicio: new Date().getFullYear() + '/' + (new Date().getMonth() + 1).toString().padStart(2, '0') + '/' + new Date().getDate(),
+      // fecha_inicio: new Date().getFullYear() + '/' + (new Date().getMonth() + 1).toString().padStart(2, '0') + '/' + new Date().getDate(),
+      fecha_inicio: moment().format('YYYY-MM-DD'),
       checkbox: true,
-      fecha_fin: new Date().getFullYear() + '/' + (new Date().getMonth() + 1).toString().padStart(2, '0') + '/' + new Date().getDate(),
+      // fecha_fin: new Date().getFullYear() + '/' + (new Date().getMonth() + 1).toString().padStart(2, '0') + '/' + new Date().getDate(),
+      fecha_fin: moment().format('YYYY-MM-DD'),
       funciones: this.funciones
     }
   },
