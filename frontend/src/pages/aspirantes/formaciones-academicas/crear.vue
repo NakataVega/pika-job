@@ -32,11 +32,7 @@
             </template>
           </q-input>
           <q-checkbox v-model="checkbox1" label="Actualmente estudio aqui" color="yellow-14" style="min-width:300px;"/>
-          <q-input v-model="fecha_fin"
-            mask="date" outlined
-            label="Fecha fin" style="min-width:300px;"
-            v-if="!checkbox1"
-          >
+          <q-input v-model="fecha_fin" mask="date" outlined label="Fecha fin" style="min-width:300px;" v-if="!checkbox1">
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
                 <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
@@ -78,7 +74,10 @@ export default {
   methods: {
     async onSubmit () {
       const { id_aspirante } = this.$store.state.user
-      if (this.checkbox1) this.fecha_fin = null
+      if (this.checkbox1) {
+        this.fecha_fin = null
+        this.checkbox2 = false
+      }
       this.checkbox2 ? this.checkbox2 = 1 : this.checkbox2 = 0
       const { data } = await this.$axios.post('/formaciones-academicas', {
         id_user: id_aspirante,

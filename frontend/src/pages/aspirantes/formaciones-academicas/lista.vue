@@ -34,7 +34,7 @@
                   <strong>Certificado/Titulado</strong>
                 </q-card-section>
                 <q-card-section class="q-pa-md q-gutter-sm">
-                   <q-btn icon="edit" type="button" class="bg-grey-9 text-yellow-14">
+                   <q-btn icon="edit" type="button" class="bg-grey-9 text-yellow-14" :to="'formaciones-academicas/editar/' + props.row.id">
                     <q-tooltip class="bg-black text-white">Editar</q-tooltip>
                   </q-btn>
                   <q-btn icon="delete" type="button" class="bg-red-9 text-white" style="float: right">
