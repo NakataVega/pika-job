@@ -37,12 +37,12 @@
                 </q-card-section>
                 <q-separator />
                 <q-card-section class="q-pa-md q-gutter-sm">
-                  <q-btn icon="edit" type="button" class="bg-grey-9 text-yellow-14" :to="'experiencias-laborales/editar/' + props.row.id">
-                    <q-tooltip class="bg-black text-white">Editar</q-tooltip>
+                  <q-btn icon="edit" label="Editar" type="button" class="bg-grey-9 text-yellow-14" :to="'experiencias-laborales/editar/' + props.row.id">
+                    <!--q-tooltip class="bg-black text-white">Editar</q-tooltip-->
                   </q-btn>
-                  <q-btn icon="delete" type="button" class="bg-red-9 text-white" style="float: right">
+                  <!--q-btn icon="delete" type="button" class="bg-red-9 text-white" style="float: right">
                     <q-tooltip class="bg-black text-white">Eliminar</q-tooltip>
-                  </q-btn>
+                  </q-btn-->
                 </q-card-section>
               </q-card>
             </div>

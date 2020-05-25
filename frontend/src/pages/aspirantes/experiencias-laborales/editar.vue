@@ -68,6 +68,23 @@
               type="button" class="bg-grey-9 text-yellow-14"
               style="min-width:300px" to=".."
             />
+            <q-btn icon="delete" type="button" class="bg-red-9 text-white" style="float: right" @click="confirm = true">
+              <q-tooltip class="bg-black text-white">Eliminar</q-tooltip>
+            </q-btn>
+
+            <q-dialog v-model="confirm" persistent>
+              <q-card>
+                <q-card-section class="row items-center">
+                  <q-avatar icon="warning" color="yellow-14" text-color="grey-9" />
+                  <span class="q-ml-sm">¿Estas seguro que deseas eliminar esta experiencia laboral?</span>
+                </q-card-section>
+
+                <q-card-actions align="right">
+                  <q-btn flat label="No" color="grey-9" v-close-popup/>
+                  <q-btn flat label="Si" color="grey-9" v-close-popup @click="eliminar()"/>
+                </q-card-actions>
+              </q-card>
+            </q-dialog>
         </div>
       </q-form>
     </q-card-section>
@@ -83,10 +100,26 @@ export default {
       fecha_inicio: moment().format('YYYY-MM-DD'),
       checkbox: true,
       fecha_fin: moment().format('YYYY-MM-DD'),
-      funciones: this.funciones
+      funciones: this.funciones,
+      confirm: false
     }
   },
   methods: {
+    async eliminar () {
+      const id = this.$route.params.id
+      const { id_aspirante } = this.$store.state.user
+      const { data } = await this.$axios.delete(`/experiencias-laborales/${id}?id_user=${id_aspirante}`)
+      if (!data) {
+        this.$router.push('..')
+        this.$q.notify({
+          position: 'top',
+          group: false,
+          timeout: 2500,
+          message: 'Algo salió mal...'
+        })
+      }
+      this.$router.push('..')
+    },
     async onSubmit () {
       const id = this.$route.params.id
       const { id_aspirante } = this.$store.state.user
