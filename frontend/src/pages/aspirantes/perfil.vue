@@ -96,6 +96,16 @@
             hint="Pais"
             style="min-width:300px"
           />
+          <q-uploader
+            url="/uploads"
+            label="Foto de pérfil"
+            color="yellow-14"
+            text-color="grey-9"
+            no-thumbnails
+            style="max-width:300px;"
+            accept=".jpg, .jpeg, .png"
+            auto-upload
+          />
         </div>
         <div class="q-gutter-md">
           <q-input
