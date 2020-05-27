@@ -96,16 +96,18 @@
             hint="Pais"
             style="min-width:300px"
           />
-          <q-uploader
+          <!--q-uploader
+            v-model="image"
             url="/uploads"
             label="Foto de pérfil"
             color="yellow-14"
             text-color="grey-9"
             no-thumbnails
-            style="max-width:300px;"
+            style="max-width:300px; min-width:300px;"
             accept=".jpg, .jpeg, .png"
             auto-upload
-          />
+            field-name="uri"
+          /-->
         </div>
         <div class="q-gutter-md">
           <q-input
@@ -116,7 +118,6 @@
             label="Conocimientos"
             hint="Escribe aqui tus actitudes y aptitudes que consideres que el reclutador deba saber :)"
           />
-
           <q-input
             outlined
             autogrow
@@ -125,6 +126,15 @@
             label="Referencias"
             hint="Referencias"
           />
+        </div>
+        <div class="q-gutter-md row items-start">
+          <q-file
+            outlined style="width:300px" use-chips
+            v-model="image" label="Foto de perfíl" accept=".jpg, .jpeg, .png" max-files="1"
+          />
+          <div>
+            <img :src="'/uploads/' + imagen" style="width:200px;">
+          </div>
         </div>
 
         <q-btn label="Actualizar información" type="submit" color="primary" style="min-width:300px"/>
@@ -149,13 +159,30 @@ export default {
       country: this.country,
       knowledge: this.knowledge,
       references: this.references,
-      showPassword: false
+      image: null,
+      showPassword: false,
+      imagen: null
     }
   },
   methods: {
     async onSubmit () {
+      const formData = new FormData()
+      formData.append('apellido_paterno', this.lastName1)
+      formData.append('apellido_materno', this.lastName2)
+      formData.append('nombre', this.firstName)
+      formData.append('telefono', this.phone)
+      formData.append('fecha_naci', this.birth)
+      formData.append('ciudad', this.city)
+      formData.append('estado', this.state)
+      formData.append('pais', this.country)
+      formData.append('conocimientos', this.knowledge)
+      formData.append('referencias', this.references)
+      formData.append('imagen', this.image)
+
       const { id_aspirante } = this.$store.state.user
-      const { data } = await this.$axios.patch(`/aspirantes/${id_aspirante}`, {
+      const { data } = await this.$axios.patch(`/aspirantes/${id_aspirante}`, formData)
+      this.imagen = data.imagen
+      /* const { data } = await this.$axios.patch(`/aspirantes/${id_aspirante}`, {
         apellido_paterno: this.lastName1,
         apellido_materno: this.lastName2,
         nombre: this.firstName,
@@ -165,8 +192,9 @@ export default {
         estado: this.state,
         pais: this.country,
         conocimientos: this.knowledge,
-        referencias: this.references
-      })
+        referencias: this.references,
+        imagen: this.image
+      }) */
       console.log(data)
       const { data: user } = await this.$axios.patch(`/users/${this.$store.state.user.id}`, {
         email: this.email,
@@ -196,6 +224,7 @@ export default {
     this.knowledge = data.conocimientos
     this.references = data.referencias
     this.showPassword = false
+    this.imagen = data.imagen || '0.png'
   }
 }
 </script>
