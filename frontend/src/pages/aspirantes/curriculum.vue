@@ -5,6 +5,17 @@
       <h6 style="margin: 0px;">Así es como los reclutadores verán toda tu información :)</h6>
     </q-card-section>
     <q-card-section>
+      <!--h4 style="font-weight: bold;">
+        {{datoPers.nombre.trim()}} {{datoPers.apellido_paterno.trim()}} {{datoPers.apellido_materno.trim()}}
+      </h4-->
+      <!--div style="position:relative; min-width:300px; max-width: 350px;">
+        <img :src="'/uploads/' + datoPers.imagen" style="min-width:300px; max-width: 350px;">
+        <div style="position:absolute; left:0; bottom:0; padding:0.01em 16px;">
+          <h5 class="text-white" style="background-color:rgba(13,13,13,0.6); margin: 10px;">
+            {{datoPers.nombre.trim()}} {{datoPers.apellido_paterno.trim()}} {{datoPers.apellido_materno.trim()}}
+          </h5>
+        </div>
+      </div-->
       <div v-if="experiencias">
         <hr>
         <h5 style="margin: 0px; font-weight:bold;">Experiencia laboral</h5>
@@ -99,6 +110,7 @@ export default {
     if (this.datoPers.referencias === '') this.datoPers.referencias = null
     if (this.datoPers.telefono === '') this.datoPers.telefono = null
     if (this.datoPers.imagen === '') this.datoPers.imagen = '0.png'
+    console.log(this.datoPers)
     // Experiencias
     const { data: experiencias } = await this.$axios.get(`experiencias-laborales?id_user=${this.$store.state.user.id_aspirante}&$sort[fecha_inicio]=-1`)
     this.experiencias = experiencias.data.map(i => ({
