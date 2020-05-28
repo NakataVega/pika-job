@@ -79,16 +79,26 @@ function myDateFormat (obj) {
 export default {
   data () {
     return {
-      datosPers: [],
+      datoPers: null,
       experiencias: null,
-      formaciones: null,
-      columns: []
+      formaciones: null
     }
   },
   async mounted () {
     // Datos personales
     const { data } = await this.$axios.get(`/aspirantes/${this.$store.state.user.id_aspirante}`)
-    console.log(data)
+    this.datoPers = data
+    if (this.datoPers.apellido_materno === '') this.datoPers.apellido_materno = null
+    if (this.datoPers.apellido_paterno === '') this.datoPers.apellido_paterno = null
+    if (this.datoPers.ciudad === '') this.datoPers.ciudad = null
+    if (this.datoPers.conocimientos === '') this.datoPers.conocimientos = null
+    if (this.datoPers.estado === '') this.datoPers.estado = null
+    if (this.datoPers.fecha_naci === '') this.datoPers.fecha_naci = null
+    if (this.datoPers.nombre === '') this.datoPers.nombre = null
+    if (this.datoPers.pais === '') this.datoPers.pais = null
+    if (this.datoPers.referencias === '') this.datoPers.referencias = null
+    if (this.datoPers.telefono === '') this.datoPers.telefono = null
+    if (this.datoPers.imagen === '') this.datoPers.imagen = '0.png'
     // Experiencias
     const { data: experiencias } = await this.$axios.get(`experiencias-laborales?id_user=${this.$store.state.user.id_aspirante}&$sort[fecha_inicio]=-1`)
     this.experiencias = experiencias.data.map(i => ({

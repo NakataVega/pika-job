@@ -170,21 +170,29 @@ export default {
   methods: {
     async onSubmit () {
       const formData = new FormData()
-      formData.append('apellido_paterno', this.lastName1)
-      formData.append('apellido_materno', this.lastName2)
-      formData.append('nombre', this.firstName)
+      formData.append('apellido_paterno', this.lastName1.trim())
+      formData.append('apellido_materno', this.lastName2.trim() || '')
+      formData.append('nombre', this.firstName.trim())
       formData.append('telefono', this.phone || '')
       formData.append('fecha_naci', this.birth)
-      formData.append('ciudad', this.city || '')
-      formData.append('estado', this.state || '')
-      formData.append('pais', this.country || '')
-      formData.append('conocimientos', this.knowledge || '')
-      formData.append('referencias', this.references || '')
+      formData.append('ciudad', this.city.trim() || '')
+      formData.append('estado', this.state.trim() || '')
+      formData.append('pais', this.country.trim() || '')
+      formData.append('conocimientos', this.knowledge.trim() || '')
+      formData.append('referencias', this.references.trim() || '')
       if (this.image) formData.append('imagen', this.image)
-
       const { id_aspirante } = this.$store.state.user
       const { data } = await this.$axios.patch(`/aspirantes/${id_aspirante}`, formData)
       if (this.image) this.imagen = data.imagen
+      this.lastName1 = data.apellido_paterno
+      this.lastName2 = data.apellido_materno
+      this.firstName = data.nombre
+      this.phone = data.telefono
+      this.city = data.ciudad
+      this.state = data.estado
+      this.country = data.pais
+      this.knowledge = data.conocimientos
+      this.references = data.referencias
       /* const { data } = await this.$axios.patch(`/aspirantes/${id_aspirante}`, {
         apellido_paterno: this.lastName1,
         apellido_materno: this.lastName2,
@@ -198,12 +206,12 @@ export default {
         referencias: this.references,
         imagen: this.image
       }) */
-      console.log(data)
       const { data: user } = await this.$axios.patch(`/users/${this.$store.state.user.id}`, {
-        email: this.email,
+        email: this.email.trim(),
         ...(this.password && { password: this.password })
       })
-      console.log(user)
+      this.email = user.email
+      this.password = ''
       this.$store.commit('setState', { user })
       this.$q.notify({
         position: 'bottom-right',
