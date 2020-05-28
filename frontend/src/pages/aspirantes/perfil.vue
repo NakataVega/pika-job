@@ -63,7 +63,10 @@
             style="min-width:300px"
           />
 
-          <q-input v-model="birth" mask="date" outlined label="Fecha de nacimiento" style="min-width:300px;">
+          <q-input v-model="birth" mask="date" outlined label="Fecha de nacimiento" style="min-width:300px;"
+            lazy-rules
+            :rules="[ val => val && val.length > 0 || 'Ingrese su fecha de nacimiento']"
+          >
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
                 <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
@@ -161,7 +164,7 @@ export default {
       references: this.references,
       image: null,
       showPassword: false,
-      imagen: null
+      imagen: '0.png'
     }
   },
   methods: {
@@ -170,18 +173,18 @@ export default {
       formData.append('apellido_paterno', this.lastName1)
       formData.append('apellido_materno', this.lastName2)
       formData.append('nombre', this.firstName)
-      formData.append('telefono', this.phone)
+      formData.append('telefono', this.phone || '')
       formData.append('fecha_naci', this.birth)
-      formData.append('ciudad', this.city)
-      formData.append('estado', this.state)
-      formData.append('pais', this.country)
-      formData.append('conocimientos', this.knowledge)
-      formData.append('referencias', this.references)
-      formData.append('imagen', this.image)
+      formData.append('ciudad', this.city || '')
+      formData.append('estado', this.state || '')
+      formData.append('pais', this.country || '')
+      formData.append('conocimientos', this.knowledge || '')
+      formData.append('referencias', this.references || '')
+      if (this.image) formData.append('imagen', this.image)
 
       const { id_aspirante } = this.$store.state.user
       const { data } = await this.$axios.patch(`/aspirantes/${id_aspirante}`, formData)
-      this.imagen = data.imagen
+      if (this.image) this.imagen = data.imagen
       /* const { data } = await this.$axios.patch(`/aspirantes/${id_aspirante}`, {
         apellido_paterno: this.lastName1,
         apellido_materno: this.lastName2,

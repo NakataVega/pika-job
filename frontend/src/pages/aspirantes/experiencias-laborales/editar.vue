@@ -58,6 +58,8 @@
             v-model="funciones"
             label="Funciones y actividades"
             hint="Describe aqui las funciones y actividades que desempeñabas en esta empresa"
+            lazy-rules
+            :rules="[ val => val && val.length > 0 || 'Ingrese una descripción de sus actividades en esta organización']"
           />
         </div>
 

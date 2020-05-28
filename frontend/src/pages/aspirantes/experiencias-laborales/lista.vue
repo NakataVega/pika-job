@@ -9,12 +9,12 @@
     <q-card-section>
       <!--div class="q-pa-md"-->
       <div>
-        <q-table
+        <q-table v-if="items"
           grid
           title="Tus experiencias laborales"
           :data="items"
           :columns="columns"
-          hide-header
+          hide-header hide-bottom
         >
           <template v-slot:item="props">
             <div class="q-pa-xs col-xs-12 col-sm-4 col-md-4">
@@ -91,8 +91,7 @@ export default {
       fecha_fin: myDateFormat(i.fecha_fin),
       actividades: i.actividades.replace(/\n/ig, '\n').split('\n')
     }))
-    console.log(this.items)
-    console.log(data)
+    if (this.items.length === 0) this.items = null
   }
 }
 </script>

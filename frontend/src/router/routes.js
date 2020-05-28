@@ -22,7 +22,8 @@ const routes = [
           { path: 'crear', component: () => import('pages/aspirantes/formaciones-academicas/crear.vue') },
           { path: 'editar/:id', component: () => import('pages/aspirantes/formaciones-academicas/editar.vue') }
         ]
-      }
+      },
+      { path: 'curriculum', component: () => import('pages/aspirantes/curriculum.vue') }
     ]
   },
   {

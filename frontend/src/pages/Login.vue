@@ -35,8 +35,8 @@
         </q-input>
 
         <div class="q-pa-md q-gutter-sm">
-          <q-btn label="Ingresar" type="submit" class="bg-yellow-14"/>
           <q-btn label="No tengo cuenta" type="button" class="bg-grey-9 text-yellow-14" to="/register"/>
+          <q-btn label="Ingresar" type="submit" class="bg-yellow-14"/>
         </div>
       </q-form>
     </q-card-section>

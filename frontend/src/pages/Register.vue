@@ -59,8 +59,8 @@
         </q-input>
 
         <div class="q-pa-md q-gutter-sm">
-          <q-btn label="Registrarme" type="submit" class="bg-yellow-14"/>
           <q-btn label="Ya tengo cuenta" type="button" class="bg-grey-9 text-yellow-14" to="/login"/>
+          <q-btn label="Registrarme" type="submit" class="bg-yellow-14"/>
         </div>
       </q-form>
     </q-card-section>

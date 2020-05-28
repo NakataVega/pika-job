@@ -9,12 +9,12 @@
     </q-card-section>
     <q-card-section>
       <div>
-        <q-table
+        <q-table v-if="items"
           grid
           title="Tu formación académica"
           :data="items"
           :columns="columns"
-          hide-header
+          hide-header hide-bottom
         >
           <template v-slot:item="props">
             <div class="q-pa-xs col-xs-12 col-sm-4 col-md-4">
@@ -87,7 +87,7 @@ export default {
       fecha_fin: myDateFormat(i.fecha_fin),
       certificado: Boolean(Number(i.certificado))
     }))
-    console.log(this.items)
+    if (this.items.length === 0) this.items = null
   }
 }
 </script>
