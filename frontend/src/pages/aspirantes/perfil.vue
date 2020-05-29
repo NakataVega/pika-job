@@ -32,7 +32,7 @@
             style="min-width:300px"
           />
 
-          <q-input
+          <!--q-input
             outlined
             v-model="email"
             label="Correo electrónico *"
@@ -40,7 +40,7 @@
             lazy-rules
             :rules="[ val => val && val.length > 0 || 'Ingrese su correo electrónico']"
             style="min-width:300px"
-          />
+          /-->
 
           <q-input outlined label='Contraseña' v-model="password" :type="!showPassword ? 'password' : 'text'" hint="Contraseña"
             style="min-width:300px;"
@@ -99,18 +99,7 @@
             hint="Pais"
             style="min-width:300px"
           />
-          <!--q-uploader
-            v-model="image"
-            url="/uploads"
-            label="Foto de pérfil"
-            color="yellow-14"
-            text-color="grey-9"
-            no-thumbnails
-            style="max-width:300px; min-width:300px;"
-            accept=".jpg, .jpeg, .png"
-            auto-upload
-            field-name="uri"
-          /-->
+
         </div>
         <div class="q-gutter-md">
           <q-input
@@ -118,7 +107,7 @@
             autogrow
             style="min-width:300px"
             v-model="knowledge"
-            label="Conocimientos"
+            label="Conocimientos y habilidades"
             hint="Escribe aqui tus actitudes y aptitudes que consideres que el reclutador deba saber :)"
           />
           <q-input
@@ -139,7 +128,6 @@
             <img :src="'/uploads/' + imagen" style="width:200px;">
           </div>
         </div>
-
         <q-btn label="Actualizar información" type="submit" color="primary" style="min-width:300px"/>
       </q-form>
     </q-card-section>
@@ -153,7 +141,7 @@ export default {
       firstName: this.firstName,
       lastName1: this.lastName1,
       lastName2: this.lastName2,
-      email: '',
+      // email: '',
       password: '',
       phone: this.phone,
       birth: this.birth,
@@ -207,10 +195,10 @@ export default {
         imagen: this.image
       }) */
       const { data: user } = await this.$axios.patch(`/users/${this.$store.state.user.id}`, {
-        email: this.email.trim(),
+        // email: this.email.trim(),
         ...(this.password && { password: this.password })
       })
-      this.email = user.email
+      // this.email = user.email
       this.password = ''
       this.$store.commit('setState', { user })
       this.$q.notify({
@@ -225,15 +213,15 @@ export default {
     const { data } = await this.$axios.get(`/aspirantes/${this.$store.state.user.id_aspirante}`)
     this.firstName = data.nombre
     this.lastName1 = data.apellido_paterno
-    this.lastName2 = data.apellido_materno
-    this.email = this.$store.state.user.email
-    this.phone = data.telefono
+    this.lastName2 = data.apellido_materno || ''
+    // this.email = this.$store.state.user.email
+    this.phone = data.telefono || ''
     this.birth = data.fecha_naci
-    this.city = data.ciudad
-    this.state = data.estado
-    this.country = data.pais
-    this.knowledge = data.conocimientos
-    this.references = data.referencias
+    this.city = data.ciudad || ''
+    this.state = data.estado || ''
+    this.country = data.pais || ''
+    this.knowledge = data.conocimientos || ''
+    this.references = data.referencias || ''
     this.showPassword = false
     this.imagen = data.imagen || '0.png'
   }

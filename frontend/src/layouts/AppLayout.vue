@@ -52,6 +52,15 @@
             <q-item-section style="color:#ffd500; font-weight:bold;">Curriculum</q-item-section>
           </q-item>
         </template>
+        <!--ORGANIZACIONES-->
+        <template v-if="$store.state.user.id_organizacion">
+          <q-item clickable to="" v-ripple>
+            <q-item-section avatar>
+              <q-icon color="yellow-14" name="dashboard"/>
+            </q-item-section>
+            <q-item-section style="color:#ffd500; font-weight:bold;">Administrar vacantes</q-item-section>
+          </q-item>
+        </template>
         <q-item clickable  @click="logout" v-ripple>
           <q-item-section avatar>
             <q-icon color="yellow-14" name="arrow_back" />

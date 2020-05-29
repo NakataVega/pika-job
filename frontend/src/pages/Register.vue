@@ -68,9 +68,15 @@
 </template>
 
 <script>
+function mailValido (mail) {
+  if (mail.includes(' ')) return false
+  var subs = mail.split('@')
+  if (subs.length !== 2) return false
+  if (subs[0].length === 0 || subs[1].length === 0) return false
+  return true
+}
 export default {
   // name: 'LayoutName',
-
   data () {
     return {
       firstName: '',
@@ -83,33 +89,44 @@ export default {
   },
   methods: {
     async onSubmit () {
-      const { data: user, error } = await this.$axios.post('/users', {
-        nombre: this.firstName,
-        apellido_paterno: this.lastName1,
-        apellido_materno: this.lastName2,
-        email: this.email,
-        password: this.password
-      })
-      if (error && error.response && error.response.data) {
+      this.email = this.email.trim()
+      if (mailValido(this.email)) {
+        const { data: user, error } = await this.$axios.post('/users', {
+          nombre: this.firstName,
+          apellido_paterno: this.lastName1,
+          apellido_materno: this.lastName2,
+          email: this.email.trim(),
+          password: this.password
+        })
+        if (error && error.response && error.response.data) {
+          this.$q.notify({
+            type: 'negative',
+            position: 'top-right',
+            group: false,
+            timeout: 2500,
+            message: error.response.data.errors.email
+          })
+        }
+        if (!user) return
+        const { data } = await this.$axios.post('/authentication', {
+          strategy: 'local',
+          email: this.email,
+          password: this.password
+        })
+        if (data) {
+          const { accessToken: token, user } = data
+          this.$axios.defaults.headers.common.Authorization = `Bearer ${token}`
+          await this.$store.dispatch('login', { user, token, userId: user.id })
+          this.$router.push('/')
+        }
+      } else {
         this.$q.notify({
           type: 'negative',
           position: 'top-right',
           group: false,
           timeout: 2500,
-          message: error.response.data.errors.email
+          message: 'Ingrese una dirección de correo válida'
         })
-      }
-      if (!user) return
-      const { data } = await this.$axios.post('/authentication', {
-        strategy: 'local',
-        email: this.email,
-        password: this.password
-      })
-      if (data) {
-        const { accessToken: token, user } = data
-        this.$axios.defaults.headers.common.Authorization = `Bearer ${token}`
-        await this.$store.dispatch('login', { user, token, userId: user.id })
-        this.$router.push('/')
       }
     }
   }
