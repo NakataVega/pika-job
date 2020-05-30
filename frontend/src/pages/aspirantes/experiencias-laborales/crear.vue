@@ -1,5 +1,5 @@
 <template>
-  <q-card>
+  <q-card v-if="$store.state.user.id_aspirante">
     <q-card-section>
       <h6 style="margin:0px">Agregar nueva experiencia laboral</h6>
       <q-form @submit="onSubmit" class="q-gutter-md" style="margin-top:10px;">
@@ -79,6 +79,7 @@
 import moment from 'moment'
 export default {
   data () {
+    if (!this.$store.state.user.id_aspirante) this.$router.push('/404')
     return {
       organizacion: this.organizacion,
       cargo: this.cargo,

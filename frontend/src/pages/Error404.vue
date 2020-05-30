@@ -7,13 +7,15 @@
       >
     </p>
     <p class="text-faded">
-      Sorry, nothing here...<strong>(404)</strong>
+      Lo sentimos, no hay nada aquí
     </p>
+    <strong>ERROR (404)</strong>
+    <br/><br/>
     <q-btn
-      color="secondary"
+      class="bg-yellow-14 text-grey-9"
       style="width:200px;"
       to="/"
-      label="Go back"
+      label="Sácame de aquí"
     />
   </div>
 </template>

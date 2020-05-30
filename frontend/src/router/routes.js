@@ -23,7 +23,15 @@ const routes = [
           { path: 'editar/:id', component: () => import('pages/aspirantes/formaciones-academicas/editar.vue') }
         ]
       },
-      { path: 'curriculum', component: () => import('pages/aspirantes/curriculum.vue') }
+      { path: 'curriculum', component: () => import('pages/aspirantes/curriculum.vue') },
+      {
+        path: 'tus-vacantes',
+        component: () => import('layouts/CrudLayout.vue'),
+        children: [
+          { path: '', component: () => import('pages/organizaciones/vacantes/lista.vue') },
+          { path: 'crear', component: () => import('pages/organizaciones/vacantes/crear.vue') }
+        ]
+      }
     ]
   },
   {

@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr lFf" v-if="$store.state.user">
     <q-header elevated>
       <q-toolbar class="bg-yellow-14 text-black">
         <q-btn
@@ -14,8 +14,6 @@
         <q-toolbar-title style="font-weight: bold;">
           PikaJob
         </q-toolbar-title>
-
-        <!--div @click="logout">Cerrar sesión de {{ $store.state.user.email }}</div-->
       </q-toolbar>
     </q-header>
 
@@ -54,7 +52,7 @@
         </template>
         <!--ORGANIZACIONES-->
         <template v-if="$store.state.user.id_organizacion">
-          <q-item clickable to="" v-ripple>
+          <q-item clickable to="/tus-vacantes" v-ripple>
             <q-item-section avatar>
               <q-icon color="yellow-14" name="dashboard"/>
             </q-item-section>
@@ -69,7 +67,6 @@
         </q-item>
       </q-list>
     </q-drawer>
-
     <q-page-container>
       <router-view />
     </q-page-container>

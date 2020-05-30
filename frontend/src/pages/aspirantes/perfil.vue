@@ -1,5 +1,5 @@
 <template>
-  <q-card>
+  <q-card v-if="$store.state.user.id_aspirante">
     <q-card-section>
       <h6>Edita tu información personal y de contacto, esto es importante para los reclutadores :)</h6>
       <q-form @submit="onSubmit" class="q-gutter-md">
@@ -137,6 +137,7 @@
 <script>
 export default {
   data () {
+    if (!this.$store.state.user.id_aspirante) this.$router.push('/404')
     return {
       firstName: this.firstName,
       lastName1: this.lastName1,
@@ -210,20 +211,23 @@ export default {
     }
   },
   async mounted () {
-    const { data } = await this.$axios.get(`/aspirantes/${this.$store.state.user.id_aspirante}`)
-    this.firstName = data.nombre
-    this.lastName1 = data.apellido_paterno
-    this.lastName2 = data.apellido_materno || ''
-    // this.email = this.$store.state.user.email
-    this.phone = data.telefono || ''
-    this.birth = data.fecha_naci
-    this.city = data.ciudad || ''
-    this.state = data.estado || ''
-    this.country = data.pais || ''
-    this.knowledge = data.conocimientos || ''
-    this.references = data.referencias || ''
-    this.showPassword = false
-    this.imagen = data.imagen || '0.png'
+    if (!this.$store.state.user.id_aspirante) this.$router.push('/404')
+    else {
+      const { data } = await this.$axios.get(`/aspirantes/${this.$store.state.user.id_aspirante}`)
+      this.firstName = data.nombre
+      this.lastName1 = data.apellido_paterno
+      this.lastName2 = data.apellido_materno || ''
+      // this.email = this.$store.state.user.email
+      this.phone = data.telefono || ''
+      this.birth = data.fecha_naci
+      this.city = data.ciudad || ''
+      this.state = data.estado || ''
+      this.country = data.pais || ''
+      this.knowledge = data.conocimientos || ''
+      this.references = data.referencias || ''
+      this.showPassword = false
+      this.imagen = data.imagen || '0.png'
+    }
   }
 }
 </script>

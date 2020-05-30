@@ -1,5 +1,5 @@
 <template>
-  <q-card>
+  <q-card v-if="$store.state.user.id_aspirante">
     <q-card-section>
       <h6 style="margin:0px">Aquí puedes gestionar tu formación académica, esta información sirve de referencia para los reclutadores :)</h6>
       <p>Tip: Se recomienda solo capturar estudios medio superiores y superiores</p>
@@ -74,6 +74,7 @@ function myDateFormat (obj) {
 }
 export default {
   data () {
+    if (!this.$store.state.user.id_aspirante) this.$router.push('/404')
     return {
       items: [],
       columns: []

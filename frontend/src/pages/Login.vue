@@ -1,5 +1,5 @@
 <template>
-  <q-card class="bg-grey-4">
+  <q-card class="bg-grey-4" v-if="!$store.state.user || (!$store.state.user.id_aspirante && !$store.state.user.id_organizacion)">
     <q-card-section>
       <img
         alt="Pika-job logo"
@@ -48,6 +48,7 @@ export default {
   // name: 'LayoutName',
 
   data () {
+    if (this.$store.state.user && (this.$store.state.user.id_aspirante || this.$store.state.user.id_organizacion)) this.$router.push('/')
     return {
       password: '',
       email: '',

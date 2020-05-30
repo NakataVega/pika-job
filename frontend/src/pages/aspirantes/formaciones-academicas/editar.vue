@@ -1,5 +1,5 @@
 <template>
-  <q-card>
+  <q-card v-if="$store.state.user.id_aspirante">
     <q-card-section>
       <h6 style="margin:0px">Editar formación académica</h6>
       <q-form @submit="onSubmit" class="q-gutter-md" style="margin-top:10px;">
@@ -81,6 +81,7 @@
 import moment from 'moment'
 export default {
   data () {
+    if (!this.$store.state.user.id_aspirante) this.$router.push('/404')
     return {
       programa: this.programa,
       institucion: this.institucion,
@@ -137,25 +138,28 @@ export default {
     }
   },
   async mounted () {
-    const id = this.$route.params.id
-    const { id_aspirante } = this.$store.state.user
-    const { data } = await this.$axios.get(`/formaciones-academicas/${id}?id_user=${id_aspirante}`)
-    if (!data) {
-      this.$router.push('..')
-      this.$q.notify({
-        position: 'top',
-        group: false,
-        timeout: 2500,
-        message: 'Algo salió mal...'
-      })
+    if (!this.$store.state.user.id_aspirante) this.$router.push('/404')
+    else {
+      const id = this.$route.params.id
+      const { id_aspirante } = this.$store.state.user
+      const { data } = await this.$axios.get(`/formaciones-academicas/${id}?id_user=${id_aspirante}`)
+      if (!data) {
+        this.$router.push('..')
+        this.$q.notify({
+          position: 'top',
+          group: false,
+          timeout: 2500,
+          message: 'Algo salió mal...'
+        })
+      }
+      this.programa = data.titulo_formacion
+      this.institucion = data.institucion
+      this.fecha_inicio = data.fecha_inicio
+      if (!data.fecha_fin) this.fecha_fin = moment().format('YYYY-MM-DD')
+      else this.fecha_fin = data.fecha_fin
+      data.fecha_fin ? this.checkbox1 = false : this.checkbox1 = true
+      data.certificado ? this.checkbox2 = true : this.checkbox2 = false
     }
-    this.programa = data.titulo_formacion
-    this.institucion = data.institucion
-    this.fecha_inicio = data.fecha_inicio
-    if (!data.fecha_fin) this.fecha_fin = moment().format('YYYY-MM-DD')
-    else this.fecha_fin = data.fecha_fin
-    data.fecha_fin ? this.checkbox1 = false : this.checkbox1 = true
-    data.certificado ? this.checkbox2 = true : this.checkbox2 = false
   }
 }
 </script>

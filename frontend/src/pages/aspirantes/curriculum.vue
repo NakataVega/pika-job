@@ -1,5 +1,5 @@
 <template>
-  <q-card>
+  <q-card v-if="$store.state.user.id_aspirante">
     <q-card-section>
       <h4 style="margin: 0px; font-weight:bold;">Tu curriculum</h4>
       <h6 style="margin: 0px;">Así es como los reclutadores verán toda tu información :)</h6>
@@ -123,6 +123,7 @@ function myDateFormat (obj) {
 }
 export default {
   data () {
+    if (!this.$store.state.user.id_aspirante) this.$router.push('/404')
     return {
       datoPers: null,
       experiencias: null,
@@ -134,42 +135,43 @@ export default {
   },
   async mounted () {
     // Datos personales
-    const { data } = await this.$axios.get(`/aspirantes/${this.$store.state.user.id_aspirante}`)
-    this.datoPers = data
-    console.log(this.datoPers)
-    if (this.datoPers.ciudad === '') this.datoPers.ciudad = null
-    else this.localidad = this.localidad + this.datoPers.ciudad + ', '
-    if (this.datoPers.estado === '') this.datoPers.estado = null
-    else this.localidad = this.localidad + this.datoPers.estado + ', '
-    if (this.datoPers.pais === '') this.datoPers.pais = null
-    else this.localidad = this.localidad + this.datoPers.pais + '.'
-    if (this.datoPers.conocimientos === '') this.datoPers.conocimientos = null
-    else this.datoPers.conocimientos = this.datoPers.conocimientos.split('\n')
-    if (this.datoPers.fecha_naci === '') this.datoPers.fecha_naci = null
-    if (this.datoPers.referencias === '') this.datoPers.referencias = null
-    else this.datoPers.referencias = this.datoPers.referencias.split('\n')
-    if (this.datoPers.telefono === '') this.datoPers.telefono = null
-    if (this.datoPers.imagen === '' || !this.datoPers.imagen) this.datoPers.imagen = '0.png'
-    else this.imagen = this.datoPers.imagen
-    console.log(this.datoPers)
-    // Experiencias
-    const { data: experiencias } = await this.$axios.get(`experiencias-laborales?id_user=${this.$store.state.user.id_aspirante}&$sort[fecha_inicio]=-1`)
-    this.experiencias = experiencias.data.map(i => ({
-      ...i,
-      fecha_inicio: myDateFormat(i.fecha_inicio),
-      fecha_fin: myDateFormat(i.fecha_fin),
-      actividades: i.actividades.replace(/\n/ig, '\n').split('\n')
-    }))
-    if (this.experiencias.length === 0) this.experiencias = null
-    // Formaciones
-    const { data: formaciones } = await this.$axios.get(`formaciones-academicas?id_user=${this.$store.state.user.id_aspirante}&$sort[fecha_inicio]=-1`)
-    this.formaciones = formaciones.data.map(i => ({
-      ...i,
-      fecha_inicio: myDateFormat(i.fecha_inicio),
-      fecha_fin: myDateFormat(i.fecha_fin),
-      certificado: Boolean(Number(i.certificado))
-    }))
-    if (this.formaciones.length === 0) this.formaciones = null
+    if (!this.$store.state.user.id_aspirante) this.$router.push('/404')
+    else {
+      const { data } = await this.$axios.get(`/aspirantes/${this.$store.state.user.id_aspirante}`)
+      this.datoPers = data
+      if (this.datoPers.ciudad === '') this.datoPers.ciudad = null
+      else this.localidad = this.localidad + this.datoPers.ciudad + ', '
+      if (this.datoPers.estado === '') this.datoPers.estado = null
+      else this.localidad = this.localidad + this.datoPers.estado + ', '
+      if (this.datoPers.pais === '') this.datoPers.pais = null
+      else this.localidad = this.localidad + this.datoPers.pais + '.'
+      if (this.datoPers.conocimientos === '') this.datoPers.conocimientos = null
+      else this.datoPers.conocimientos = this.datoPers.conocimientos.split('\n')
+      if (this.datoPers.fecha_naci === '') this.datoPers.fecha_naci = null
+      if (this.datoPers.referencias === '') this.datoPers.referencias = null
+      else this.datoPers.referencias = this.datoPers.referencias.split('\n')
+      if (this.datoPers.telefono === '') this.datoPers.telefono = null
+      if (this.datoPers.imagen === '' || !this.datoPers.imagen) this.datoPers.imagen = '0.png'
+      else this.imagen = this.datoPers.imagen
+      // Experiencias
+      const { data: experiencias } = await this.$axios.get(`experiencias-laborales?id_user=${this.$store.state.user.id_aspirante}&$sort[fecha_inicio]=-1`)
+      this.experiencias = experiencias.data.map(i => ({
+        ...i,
+        fecha_inicio: myDateFormat(i.fecha_inicio),
+        fecha_fin: myDateFormat(i.fecha_fin),
+        actividades: i.actividades.replace(/\n/ig, '\n').split('\n')
+      }))
+      if (this.experiencias.length === 0) this.experiencias = null
+      // Formaciones
+      const { data: formaciones } = await this.$axios.get(`formaciones-academicas?id_user=${this.$store.state.user.id_aspirante}&$sort[fecha_inicio]=-1`)
+      this.formaciones = formaciones.data.map(i => ({
+        ...i,
+        fecha_inicio: myDateFormat(i.fecha_inicio),
+        fecha_fin: myDateFormat(i.fecha_fin),
+        certificado: Boolean(Number(i.certificado))
+      }))
+      if (this.formaciones.length === 0) this.formaciones = null
+    }
   }
 }
 </script>
