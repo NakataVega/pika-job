@@ -28,7 +28,7 @@
                 <q-card-section class="text-center">
                   <p style="margin:0px">{{ props.row.fecha_inicio }} - {{ props.row.fecha_fin }}</p>
                 </q-card-section>
-                <q-separator />
+                <q-separator v-if="props.row.certificado"/>
                 <q-card-section class="text-center" v-if="props.row.certificado">
                   <q-icon class="text-yellow-14" style="margin-right:5px" name="stars"/>
                   <strong>Certificado/Titulado</strong>

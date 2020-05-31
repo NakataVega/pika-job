@@ -35,7 +35,6 @@
                     {{ actividad }}
                   </p>
                 </q-card-section>
-                <q-separator />
                 <q-card-section class="q-pa-md q-gutter-sm">
                   <q-btn icon="edit" label="Editar" type="button" class="bg-grey-9 text-yellow-14" :to="'experiencias-laborales/editar/' + props.row.id">
                     <!--q-tooltip class="bg-black text-white">Editar</q-tooltip-->
