@@ -32,7 +32,10 @@
                 <i>Publicada: {{props.row.createdAt}}</i><br>
                 <i v-if="props.row.updatedAt !== props.row.createdAt">Actualizada: {{props.row.updatedAt}}<br></i>
                 <q-icon size="xs" name="place"/><i>{{props.row.lugar}}</i><br>
-                <q-icon size="xs" name="attach_money"/><i style="font-weight:bold;">{{props.row.sueldo}}</i>
+                <q-icon size="xs" name="attach_money"
+                  v-if="parseFloat(props.row.sueldo) !== 0"
+                />
+                <i style="font-weight:bold;" v-if="parseFloat(props.row.sueldo) !== 0">{{props.row.sueldo}}</i>
               </q-card-section>
               <q-separator />
               <q-card-section>
@@ -106,6 +109,7 @@ export default {
         updatedAt: myDateFormat(i.updatedAt.split('T')[0])
       }))
       if (this.items.length === 0) this.items = null
+      console.log(this.items)
     }
   }
 }

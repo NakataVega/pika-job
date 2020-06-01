@@ -1,5 +1,7 @@
 <template>
-  <q-card class="bg-grey-4" v-if="!$store.state.user || (!$store.state.user.id_aspirante && !$store.state.user.id_organizacion)">
+  <q-card style="background-color: rgba(255,255,255,0.2)"
+    v-if="!$store.state.user || (!$store.state.user.id_aspirante && !$store.state.user.id_organizacion)"
+  >
     <q-card-section>
       <img
         alt="Pika-job logo"

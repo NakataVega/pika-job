@@ -29,7 +29,8 @@ const routes = [
         component: () => import('layouts/CrudLayout.vue'),
         children: [
           { path: '', component: () => import('pages/organizaciones/vacantes/lista.vue') },
-          { path: 'crear', component: () => import('pages/organizaciones/vacantes/crear.vue') }
+          { path: 'crear', component: () => import('pages/organizaciones/vacantes/crear.vue') },
+          { path: 'editar/:id', component: () => import('pages/organizaciones/vacantes/editar.vue') }
         ]
       }
     ]

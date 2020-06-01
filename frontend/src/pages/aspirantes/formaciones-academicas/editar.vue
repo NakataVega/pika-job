@@ -55,22 +55,22 @@
             style="min-width:300px" to=".."
           />
           <q-btn icon="delete" type="button" class="bg-red-9 text-white" style="float: right" @click="confirm = true">
-              <q-tooltip class="bg-black text-white">Eliminar</q-tooltip>
-            </q-btn>
+            <q-tooltip class="bg-black text-white">Eliminar</q-tooltip>
+          </q-btn>
 
-            <q-dialog v-model="confirm" persistent>
-              <q-card>
-                <q-card-section class="row items-center">
-                  <q-avatar icon="warning" color="yellow-14" text-color="grey-9" />
-                  <span class="q-ml-sm">¿Estas seguro que deseas eliminar esta experiencia laboral?</span>
-                </q-card-section>
+          <q-dialog v-model="confirm" persistent>
+            <q-card>
+              <q-card-section class="row items-center">
+                <q-avatar icon="warning" color="yellow-14" text-color="grey-9" />
+                <span class="q-ml-sm">¿Estas seguro que deseas eliminar esta experiencia laboral?</span>
+              </q-card-section>
 
-                <q-card-actions align="right">
-                  <q-btn flat label="No" color="grey-9" v-close-popup/>
-                  <q-btn flat label="Si" color="grey-9" v-close-popup @click="eliminar()"/>
-                </q-card-actions>
-              </q-card>
-            </q-dialog>
+              <q-card-actions align="right">
+                <q-btn flat label="No" color="grey-9" v-close-popup/>
+                <q-btn flat label="Si" color="grey-9" v-close-popup @click="eliminar()"/>
+              </q-card-actions>
+            </q-card>
+          </q-dialog>
         </div>
       </q-form>
     </q-card-section>
