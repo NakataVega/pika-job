@@ -35,19 +35,19 @@
                 <q-icon size="xs" name="attach_money"
                   v-if="parseFloat(props.row.sueldo) !== 0"
                 />
-                <i style="font-weight:bold;" v-if="parseFloat(props.row.sueldo) !== 0">{{props.row.sueldo}}</i>
+                <i style="font-weight:bold;" v-if="parseFloat(props.row.sueldo) !== 0">{{props.row.sueldo}} mensuales</i>
               </q-card-section>
               <q-separator />
               <q-card-section>
                 <strong>Descripción</strong><br>
-                <p v-for="desc in props.row.descripcion" :key="desc" style="margin: 0px">
+                <p v-for="desc in props.row.descripcion" :key="desc.id" style="margin: 0px">
                   {{ desc }}
                 </p>
               </q-card-section>
               <q-separator />
               <q-card-section>
                 <strong>Requisitos</strong><br>
-                <p v-for="requisito in props.row.requisitos" :key="requisito" style="margin: 0px">
+                <p v-for="requisito in props.row.requisitos" :key="requisito.id" style="margin: 0px">
                   {{ requisito }}
                 </p>
               </q-card-section>
@@ -82,9 +82,12 @@ function toMonth (number) {
   if (number === 12) return 'Diciembre'
 }
 function myDateFormat (obj) {
+  console.log(obj)
   if (!obj) return 'Actualidad'
   else {
     var f = new Date(obj)
+    console.log('-------')
+    console.log(f)
     // return fecha.toLocaleDateString()
     return f.getDate() + '/' + toMonth(f.getMonth() + 1) + '/' + f.getFullYear()
   }
@@ -105,8 +108,8 @@ export default {
         ...i,
         descripcion: i.descripcion.split('\n'),
         requisitos: i.requisitos.split('\n'),
-        createdAt: myDateFormat(i.createdAt.split('T')[0]),
-        updatedAt: myDateFormat(i.updatedAt.split('T')[0])
+        createdAt: myDateFormat(i.createdAt.replace('-', '/').split('T')[0]),
+        updatedAt: myDateFormat(i.updatedAt.replace('-', '/').split('T')[0])
       }))
       if (this.items.length === 0) this.items = null
       console.log(this.items)

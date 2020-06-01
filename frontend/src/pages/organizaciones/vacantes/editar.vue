@@ -25,7 +25,7 @@
           <q-input
             outlined autogrow
             v-model="sueldo"
-            label="Sueldo *"
+            label="Sueldo mensual *"
             hint="Puede poner 0.00 para mantener oculto al momento de mostrar"
             lazy-rules
             :rules="[ val => val && val.length > 3 && val[0] !== '#' || 'Ingrese el sueldo']"
