@@ -68,7 +68,7 @@
             <q-btn
               label="Volver atrás"
               type="button" class="bg-grey-9 text-yellow-14"
-              style="min-width:300px" to=".."
+              style="min-width:300px" :to="'/aspirante/experiencias-laborales'"
             />
             <q-btn icon="delete" type="button" class="bg-red-9 text-white" style="float: right" @click="confirm = true">
               <q-tooltip class="bg-black text-white">Eliminar</q-tooltip>
@@ -113,7 +113,7 @@ export default {
       const { id_aspirante } = this.$store.state.user
       const { data } = await this.$axios.delete(`/experiencias-laborales/${id}?id_user=${id_aspirante}`)
       if (!data) {
-        this.$router.push('..')
+        this.$router.push('/aspirante/experiencias-laborales')
         this.$q.notify({
           position: 'top',
           group: false,
@@ -121,7 +121,7 @@ export default {
           message: 'Algo salió mal...'
         })
       }
-      this.$router.push('..')
+      this.$router.push('/aspirante/experiencias-laborales')
     },
     async onSubmit () {
       const id = this.$route.params.id
@@ -146,7 +146,7 @@ export default {
         timeout: 2500,
         message: '¡Cambios realizados!'
       })
-      this.$router.push('..')
+      this.$router.push('/aspirante/experiencias-laborales')
     }
   },
   async mounted () {
@@ -156,7 +156,7 @@ export default {
       const { id_aspirante } = this.$store.state.user
       const { data } = await this.$axios.get(`/experiencias-laborales/${id}?id_user=${id_aspirante}`)
       if (!data) {
-        this.$router.push('..')
+        this.$router.push('/aspirante/experiencias-laborales')
         this.$q.notify({
           position: 'top',
           group: false,

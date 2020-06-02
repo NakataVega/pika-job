@@ -128,7 +128,7 @@
             <img :src="'/uploads/' + imagen" style="width:200px;">
           </div>
         </div>
-        <q-btn label="Actualizar información" type="submit" color="primary" style="min-width:300px"/>
+        <q-btn label="Actualizar información" type="submit" class="bg-yellow-14 text-grey-9" style="min-width:300px"/>
       </q-form>
     </q-card-section>
   </q-card>

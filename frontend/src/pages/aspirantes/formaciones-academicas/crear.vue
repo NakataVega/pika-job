@@ -48,7 +48,7 @@
           <q-btn
             label="Volver atrás"
             type="button" class="bg-grey-9 text-yellow-14"
-            style="min-width:300px" to="../formaciones-academicas"
+            style="min-width:300px" :to="'/aspirante/formaciones-academicas'"
           />
         </div>
       </q-form>
@@ -95,7 +95,7 @@ export default {
         timeout: 2500,
         message: '¡Formación guardada!'
       })
-      this.$router.push('../formaciones-academicas')
+      this.$router.push('/aspirante/formaciones-academicas')
     }
   }
 }

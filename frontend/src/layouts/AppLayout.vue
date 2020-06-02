@@ -31,13 +31,13 @@
             </q-item-section>
             <q-item-section style="color:#ffd500; font-weight:bold;">Perfil</q-item-section>
           </q-item>
-          <q-item clickable to="/experiencias-laborales" v-ripple>
+          <q-item clickable to="/aspirante/experiencias-laborales" v-ripple>
             <q-item-section avatar>
               <q-icon color="yellow-14" name="business_center" />
             </q-item-section>
             <q-item-section style="color:#ffd500; font-weight:bold;">Experiencia laboral</q-item-section>
           </q-item>
-          <q-item clickable to="/formaciones-academicas" v-ripple>
+          <q-item clickable to="/aspirante/formaciones-academicas" v-ripple>
             <q-item-section avatar>
               <q-icon color="yellow-14" name="school" />
             </q-item-section>
@@ -48,6 +48,12 @@
               <q-icon color="yellow-14" name="description" />
             </q-item-section>
             <q-item-section style="color:#ffd500; font-weight:bold;">Curriculum</q-item-section>
+          </q-item>
+          <q-item clickable to="/aspirante/vacantes" v-ripple>
+            <q-item-section avatar>
+              <q-icon color="yellow-14" name="search" />
+            </q-item-section>
+            <q-item-section style="color:#ffd500; font-weight:bold;">Vacantes</q-item-section>
           </q-item>
         </template>
         <!--ORGANIZACIONES-->

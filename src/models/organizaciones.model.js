@@ -20,6 +20,20 @@ class organizaciones extends Model {
     };
   }
 
+  static get relationMappings() {
+    const Vacantes = require('./vacantes.model.js')
+    return {
+      vacantes: {
+        relation: Model.HasManyRelation,
+        modelClass: Vacantes,
+        join: {
+          from: 'organizaciones.id',
+          to: 'vacantes.id_organizacion'
+        }
+      }
+    };
+  }
+
   $beforeInsert() {
     this.createdAt = this.updatedAt = moment().format('YYYY-MM-DD HH:mm:ss');
   }

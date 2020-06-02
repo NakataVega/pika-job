@@ -4,7 +4,7 @@
       <h6 style="margin:0px">Aquí puedes gestionar tu formación académica, esta información sirve de referencia para los reclutadores :)</h6>
       <p>Tip: Se recomienda solo capturar estudios medio superiores y superiores</p>
       <q-btn label="Agregar formación" icon="add_box" style="margin-top: 10px;"
-        type="button" class="bg-yellow-14" to="formaciones-academicas/crear" append
+        type="button" class="bg-yellow-14" to="/aspirante/formaciones-academicas/crear" append
       />
     </q-card-section>
     <q-card-section>
@@ -34,7 +34,7 @@
                   <strong>Certificado/Titulado</strong>
                 </q-card-section>
                 <q-card-section class="q-pa-md q-gutter-sm">
-                   <q-btn icon="edit" type="button" label="Editar" class="bg-grey-9 text-yellow-14" :to="'formaciones-academicas/editar/' + props.row.id">
+                   <q-btn icon="edit" type="button" label="Editar" class="bg-grey-9 text-yellow-14" :to="'/aspirante/formaciones-academicas/editar/' + props.row.id">
                     <!--q-tooltip class="bg-black text-white">Editar</q-tooltip-->
                   </q-btn>
                   <!--q-btn icon="delete" type="button" class="bg-red-9 text-white" style="float: right">

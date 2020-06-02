@@ -102,7 +102,7 @@ export default {
   },
   async mounted () {
     if (!this.$store.state.user.id_organizacion) this.$router.push('/404')
-    {
+    else {
       const { data } = await this.$axios.get(`vacantes?id_organizacion=${this.$store.state.user.id_organizacion}`)
       this.items = data.data.map(i => ({
         ...i,

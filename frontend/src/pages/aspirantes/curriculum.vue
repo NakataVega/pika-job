@@ -93,6 +93,16 @@
             </q-item>
           </q-list>
         </div>
+        <div v-if="datoPers.referencias">
+          <hr>
+          <h5 style="margin:0px;font-weight:bold;"><q-icon size="md" class="text-yellow-14" name="import_contacts"/> Referencias</h5>
+          <hr>
+          <div style="padding: 0px 10px;">
+            <p style="font-size:14px; font-style:italic; font-weight:normal; margin:0px;"
+              v-for="referencia in datoPers.referencias" :key="referencia">{{referencia}}
+            </p>
+          </div>
+        </div>
       </q-card-section>
     </q-card-section>
   </q-card>

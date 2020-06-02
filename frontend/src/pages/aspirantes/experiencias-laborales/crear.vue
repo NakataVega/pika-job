@@ -5,7 +5,7 @@
       <q-form @submit="onSubmit" class="q-gutter-md" style="margin-top:10px;">
         <div class="q-gutter-md row items-start">
           <q-input
-            outlined autogrow
+            outlined
             v-model="organizacion"
             label="Empresa u organización *"
             hint="Nombre de la empresa u organización"
@@ -15,7 +15,7 @@
           />
 
           <q-input
-            outlined autogrow
+            outlined
             v-model="cargo"
             label="Cargo *"
             hint="Cargo desempeñado en la organización"
@@ -52,7 +52,6 @@
 
           <q-input
             outlined
-            autogrow
             style="min-width:300px"
             v-model="funciones"
             label="Funciones y actividades"
@@ -67,7 +66,7 @@
             <q-btn
               label="Volver atrás"
               type="button" class="bg-grey-9 text-yellow-14"
-              style="min-width:300px" to="../experiencias-laborales"
+              style="min-width:300px" :to="'/aspirante/experiencias-laborales'"
             />
         </div>
       </q-form>
@@ -110,7 +109,7 @@ export default {
         timeout: 2500,
         message: '¡Experiencia guardada!'
       })
-      this.$router.push('../experiencias-laborales')
+      this.$router.push('/aspirante/experiencias-laborales')
     }
   }
 }

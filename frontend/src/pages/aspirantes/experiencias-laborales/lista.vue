@@ -3,7 +3,7 @@
     <q-card-section>
       <h6 style="margin:0px">Aquí puedes gestionar tus experiencias laborales, recuerda que serán visibles para los reclutadores :)</h6>
       <q-btn label="Agregar experiencia" icon="add" style="margin-top: 10px;"
-        type="button" class="bg-yellow-14" to="experiencias-laborales/crear" append
+        type="button" class="bg-yellow-14" to="/aspirante/experiencias-laborales/crear" append
       />
     </q-card-section>
     <q-card-section>
@@ -14,7 +14,7 @@
           title="Tus experiencias laborales"
           :data="items"
           :columns="columns"
-          hide-header hide-bottom
+          hide-header
         >
           <template v-slot:item="props">
             <div class="q-pa-xs col-xs-12 col-sm-4 col-md-4">
@@ -36,7 +36,7 @@
                   </p>
                 </q-card-section>
                 <q-card-section class="q-pa-md q-gutter-sm">
-                  <q-btn icon="edit" label="Editar" type="button" class="bg-grey-9 text-yellow-14" :to="'experiencias-laborales/editar/' + props.row.id">
+                  <q-btn icon="edit" label="Editar" type="button" class="bg-grey-9 text-yellow-14" :to="'/aspirante/experiencias-laborales/editar/' + props.row.id">
                     <!--q-tooltip class="bg-black text-white">Editar</q-tooltip-->
                   </q-btn>
                   <!--q-btn icon="delete" type="button" class="bg-red-9 text-white" style="float: right">

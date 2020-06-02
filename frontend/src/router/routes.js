@@ -6,7 +6,7 @@ const routes = [
     children: [
       { path: 'perfil', component: () => import('pages/aspirantes/perfil.vue') },
       {
-        path: 'experiencias-laborales',
+        path: 'aspirante/experiencias-laborales',
         component: () => import('layouts/CrudLayout.vue'),
         children: [
           { path: '', component: () => import('pages/aspirantes/experiencias-laborales/lista.vue') },
@@ -15,7 +15,7 @@ const routes = [
         ]
       },
       {
-        path: 'formaciones-academicas',
+        path: 'aspirante/formaciones-academicas',
         component: () => import('layouts/CrudLayout.vue'),
         children: [
           { path: '', component: () => import('pages/aspirantes/formaciones-academicas/lista.vue') },
@@ -24,6 +24,7 @@ const routes = [
         ]
       },
       { path: 'curriculum', component: () => import('pages/aspirantes/curriculum.vue') },
+      { path: 'aspirante/vacantes', component: () => import('pages/aspirantes/vacantes.vue') },
       {
         path: 'tus-vacantes',
         component: () => import('layouts/CrudLayout.vue'),
