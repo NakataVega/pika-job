@@ -24,7 +24,14 @@ const routes = [
         ]
       },
       { path: 'curriculum', component: () => import('pages/aspirantes/curriculum.vue') },
-      { path: 'aspirante/vacantes', component: () => import('pages/aspirantes/vacantes.vue') },
+      {
+        path: 'aspirante/vacantes',
+        component: () => import('layouts/CrudLayout.vue'),
+        children: [
+          { path: '', component: () => import('pages/aspirantes/vacantes/lista.vue') },
+          { path: 'ver/:id', component: () => import('pages/aspirantes/vacantes/ver.vue') }
+        ]
+      },
       {
         path: 'tus-vacantes',
         component: () => import('layouts/CrudLayout.vue'),

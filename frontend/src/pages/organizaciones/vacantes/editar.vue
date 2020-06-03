@@ -65,7 +65,7 @@
           <q-btn
             label="Volver atrás"
             type="button" class="bg-grey-9 text-yellow-14"
-            style="min-width:300px" to=".."
+            style="min-width:300px" to="/tus-vacantes"
           />
           <q-btn v-if="this.activo === 1"
             icon="pause_circle_outline" type="button" label="Pausar vacante"
@@ -121,7 +121,7 @@ export default {
         timeout: 2500,
         message: '¡Vacante pausada!'
       })
-      this.$router.push('..')
+      this.$router.push('/tus-vacantes')
     },
     async onSubmit () {
       const id = this.$route.params.id
@@ -142,7 +142,7 @@ export default {
         timeout: 2500,
         message: '¡Vacante publicada!'
       })
-      this.$router.push('..')
+      this.$router.push('/tus-vacantes')
     }
   },
   async mounted () {
@@ -152,7 +152,7 @@ export default {
       const { id_organizacion } = this.$store.state.user
       const { data } = await this.$axios.get(`/vacantes/${id}?id_organizacion=${id_organizacion}`)
       if (!data) {
-        this.$router.push('..')
+        this.$router.push('/tus-vacantes')
         this.$q.notify({
           position: 'top',
           group: false,

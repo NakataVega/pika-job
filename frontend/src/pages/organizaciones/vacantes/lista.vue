@@ -3,7 +3,7 @@
     <q-card-section>
       <h6 style="margin:0px">Aquí puedes gestionar tus vacantes publicadas</h6>
       <q-btn label="Agregar vacante" icon="add_box" style="margin-top: 10px;"
-        type="button" class="bg-yellow-14" to="tus-vacantes/crear" append
+        type="button" class="bg-yellow-14" to="/tus-vacantes/crear" append
       />
     </q-card-section>
     <q-card-section>
@@ -12,7 +12,11 @@
         title="Tus vacantes"
         :data="items"
         :columns="columns"
-        hide-header hide-bottom
+        hide-header
+        virtual-scroll
+        :virtual-scroll-item-size="this.items.length"
+        :pagination="pagination"
+        :rows-per-page-options="[0]"
       >
         <template v-slot:item="props">
           <div class="q-pa-xs col-xs-12 col-sm-6 col-md-4">
@@ -52,7 +56,7 @@
                 </p>
               </q-card-section>
               <q-card-section class="q-pa-md q-gutter-sm">
-                <q-btn icon="edit" label="Editar" type="button" class="bg-grey-9 text-yellow-14" :to="'tus-vacantes/editar/' + props.row.id">
+                <q-btn icon="edit" label="Editar" type="button" class="bg-grey-9 text-yellow-14" :to="'/tus-vacantes/editar/' + props.row.id">
                   <!--q-tooltip class="bg-black text-white">Editar</q-tooltip-->
                 </q-btn>
                 <!--q-btn icon="delete" type="button" class="bg-red-9 text-white" style="float: right">
@@ -82,12 +86,9 @@ function toMonth (number) {
   if (number === 12) return 'Diciembre'
 }
 function myDateFormat (obj) {
-  console.log(obj)
   if (!obj) return 'Actualidad'
   else {
     var f = new Date(obj)
-    console.log('-------')
-    console.log(f)
     // return fecha.toLocaleDateString()
     return f.getDate() + '/' + toMonth(f.getMonth() + 1) + '/' + f.getFullYear()
   }
@@ -97,13 +98,17 @@ export default {
     if (!this.$store.state.user.id_organizacion) this.$router.push('/404')
     return {
       items: [],
-      columns: []
+      columns: [],
+      pagination: {
+        rowsPerPage: 0
+      }
     }
   },
   async mounted () {
     if (!this.$store.state.user.id_organizacion) this.$router.push('/404')
     else {
       const { data } = await this.$axios.get(`vacantes?id_organizacion=${this.$store.state.user.id_organizacion}`)
+      console.log(data)
       this.items = data.data.map(i => ({
         ...i,
         descripcion: i.descripcion.split('\n'),

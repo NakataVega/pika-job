@@ -64,7 +64,7 @@
           <q-btn
             label="Volver atrás"
             type="button" class="bg-grey-9 text-yellow-14"
-            style="min-width:300px" to="../tus-vacantes"
+            style="min-width:300px" to="/tus-vacantes"
           />
         </div>
       </q-form>
@@ -104,7 +104,7 @@ export default {
         timeout: 2500,
         message: '¡Vacante publicada!'
       })
-      this.$router.push('../tus-vacantes')
+      this.$router.push('/tus-vacantes')
     }
   }
 }
