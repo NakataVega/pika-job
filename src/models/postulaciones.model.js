@@ -12,7 +12,7 @@ class postulaciones extends Model {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['text'],
+      required: ['id_aspirante','id_vacante'],
 
       properties: {
         text: { type: 'string' }

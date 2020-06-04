@@ -101,7 +101,6 @@ export default {
         updatedAt: myDateFormat(i.updatedAt.replace('-', '/').split('T')[0])
       }))
       if (this.items.length === 0) this.items = null
-      console.log(this.items)
     }
   }
 }
