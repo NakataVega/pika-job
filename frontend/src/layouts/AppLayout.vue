@@ -64,6 +64,19 @@
             </q-item-section>
             <q-item-section style="color:#ffd500; font-weight:bold;">Administrar vacantes</q-item-section>
           </q-item>
+          <q-item clickable to="/organizacion/postulaciones" v-ripple>
+            <q-item-section avatar>
+              <q-icon color="yellow-14" name="emoji_people"/>
+            </q-item-section>
+            <q-item-section style="color:#ffd500; font-weight:bold;">
+              Postulaciones recibidas
+            </q-item-section>
+            <q-item-section class="col-2" v-if="this.notifications !== 0">
+              <q-badge class="bg-yellow-14 text-grey-9">
+                <strong>{{this.notifications}}</strong>
+              </q-badge>
+            </q-item-section>
+          </q-item>
         </template>
         <q-item clickable  @click="logout" v-ripple>
           <q-item-section avatar>
@@ -87,13 +100,27 @@ export default {
 
   data () {
     return {
-      leftDrawerOpen: false
+      leftDrawerOpen: false,
+      notifications: 0
     }
   },
   methods: {
     logout () {
       localStorage.clear()
       document.location.reload()
+    }
+  },
+  async mounted () {
+    if (this.$store.state.user.id_organizacion) {
+      const { data } = await this.$axios.get('postulaciones', {
+        params: {
+          status: 1,
+          $eager: '[vacante, aspirante]',
+          $joinRelation: '[vacante, aspirante]',
+          'vacante.id_organizacion': this.$store.state.user.id_organizacion
+        }
+      })
+      this.notifications = data.total
     }
   }
 }

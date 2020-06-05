@@ -33,7 +33,7 @@
         />
         <q-item-label v-else style="font-weight: bold;">
           Ya te has postulado recientemente a esta vacante, revisa tus postulaciones.
-          <br>Para postularte nuevamente, deben transcurrir 7 días desde tu última postulación
+          <br>Para postularte nuevamente, deben transcurrir 7 días desde tu última postulación.
         </q-item-label>
         <q-dialog v-model="confirm" persistent>
           <q-card>

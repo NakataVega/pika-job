@@ -40,6 +40,14 @@ const routes = [
           { path: 'crear', component: () => import('pages/organizaciones/vacantes/crear.vue') },
           { path: 'editar/:id', component: () => import('pages/organizaciones/vacantes/editar.vue') }
         ]
+      },
+      {
+        path: 'organizacion/postulaciones',
+        component: () => import('layouts/CrudLayout.vue'),
+        children: [
+          { path: '', component: () => import('pages/organizaciones/postulaciones/lista.vue') },
+          { path: 'ver/:id', component: () => import('pages/organizaciones/postulaciones/ver.vue') }
+        ]
       }
     ]
   },

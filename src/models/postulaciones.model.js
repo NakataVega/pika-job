@@ -20,6 +20,29 @@ class postulaciones extends Model {
     };
   }
 
+  static get relationMappings() {
+    const Aspirantes = require('./aspirantes.model.js')
+    const Vacantes = require('./vacantes.model.js')
+    return {
+      aspirante: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Aspirantes,
+        join: {
+          to: 'aspirantes.id',
+          from: 'postulaciones.id_aspirante'
+        }
+      },
+      vacante: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Vacantes,
+        join: {
+          to: 'vacantes.id',
+          from: 'postulaciones.id_vacante'
+        }
+      }
+    };
+  }
+
   $beforeInsert() {
     this.createdAt = this.updatedAt = moment().format('YYYY-MM-DD HH:mm:ss');
   }
