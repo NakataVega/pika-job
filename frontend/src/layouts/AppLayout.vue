@@ -55,6 +55,12 @@
             </q-item-section>
             <q-item-section style="color:#ffd500; font-weight:bold;">Vacantes</q-item-section>
           </q-item>
+          <q-item clickable to="/aspirante/postulaciones" v-ripple>
+            <q-item-section avatar>
+              <q-icon color="yellow-14" name="emoji_people" />
+            </q-item-section>
+            <q-item-section style="color:#ffd500; font-weight:bold;">Tus postulaciones</q-item-section>
+          </q-item>
         </template>
         <!--ORGANIZACIONES-->
         <template v-if="$store.state.user.id_organizacion">
@@ -71,9 +77,9 @@
             <q-item-section style="color:#ffd500; font-weight:bold;">
               Postulaciones recibidas
             </q-item-section>
-            <q-item-section class="col-2" v-if="this.notifications !== 0">
+            <q-item-section class="col-3" v-if="this.$store.state.postulacionesNuevas !== 0">
               <q-badge class="bg-yellow-14 text-grey-9">
-                <strong>{{this.notifications}}</strong>
+                <strong>{{this.$store.state.postulacionesNuevas}} nuevas</strong>
               </q-badge>
             </q-item-section>
           </q-item>
@@ -100,8 +106,7 @@ export default {
 
   data () {
     return {
-      leftDrawerOpen: false,
-      notifications: 0
+      leftDrawerOpen: false
     }
   },
   methods: {
@@ -120,7 +125,7 @@ export default {
           'vacante.id_organizacion': this.$store.state.user.id_organizacion
         }
       })
-      this.notifications = data.total
+      this.$store.commit('setState', { postulacionesNuevas: data.total })
     }
   }
 }

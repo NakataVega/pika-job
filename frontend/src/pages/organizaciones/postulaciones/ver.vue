@@ -163,6 +163,7 @@ export default {
           await this.$axios.patch(`/postulaciones/${id}`, {
             status: 2
           })
+          this.$store.commit('setState', { postulacionesNuevas: this.$store.state.postulacionesNuevas - 1 })
         }
         this.info = data
         this.nombre_vacante = this.info.vacante.nombre_vacante

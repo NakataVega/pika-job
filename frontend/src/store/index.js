@@ -18,7 +18,8 @@ const state = {
   token: localStorage.getItem('token'),
   user: null,
   loaded: false,
-  userId: localStorage.getItem('userId')
+  userId: localStorage.getItem('userId'),
+  postulacionesNuevas: 0
 }
 
 const actions = {

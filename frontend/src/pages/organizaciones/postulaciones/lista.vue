@@ -39,6 +39,9 @@
 </template>
 
 <script>
+function isNew (element) {
+  return element.status === 1
+}
 function toMonth (number) {
   if (number === 1) return 'Enero'
   if (number === 2) return 'Febrero'
@@ -88,6 +91,10 @@ export default {
         createdAt: myDateFormat(i.createdAt.replace(/-/g, '/').split('T')[0])
       }))
       if (this.items.length === 0) this.items = null
+      else {
+        var nuevos = this.items.filter(isNew)
+        this.$store.commit('setState', { postulacionesNuevas: nuevos.length })
+      }
     }
   }
 }

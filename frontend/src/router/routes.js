@@ -33,6 +33,13 @@ const routes = [
         ]
       },
       {
+        path: 'aspirante/postulaciones',
+        component: () => import('layouts/CrudLayout.vue'),
+        children: [
+          { path: '', component: () => import('pages/aspirantes/postulaciones/lista.vue') }
+        ]
+      },
+      {
         path: 'tus-vacantes',
         component: () => import('layouts/CrudLayout.vue'),
         children: [
