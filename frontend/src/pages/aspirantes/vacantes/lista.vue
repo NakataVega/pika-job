@@ -49,6 +49,8 @@
 </template>
 
 <script>
+var stringSimilarity = require('string-similarity')
+
 function toMonth (number) {
   if (number === 1) return 'Enero'
   if (number === 2) return 'Febrero'
@@ -84,23 +86,44 @@ export default {
   async mounted () {
     if (!this.$store.state.user.id_aspirante) this.$router.push('/404')
     else {
-      /* const { data } = await this.$axios.get('vacantes?activo=1')
-      this.items = data.data.map(i => ({
-        ...i,
-        descripcion: i.descripcion.split('\n'),
-        requisitos: i.requisitos.split('\n'),
-        createdAt: myDateFormat(i.createdAt.replace('-', '/').split('T')[0]),
-        updatedAt: myDateFormat(i.updatedAt.replace('-', '/').split('T')[0])
-      }))
-      if (this.items.length === 0) this.items = null
-      console.log(this.items) */
-      // const vacantes = await this.$axios.get('organizaciones?$eager=vacantes')
+      const id_aspirante = this.$store.state.user.id_aspirante
+      // Obtener cadena de las experiencias
+      var { data: experiencias } = await this.$axios.get('experiencias-laborales?', { params: { id_user: id_aspirante } })
+      var strSkills = ''
+      if (experiencias.total !== 0) {
+        for (let index = 0; index < experiencias.data.length; index++) {
+          strSkills = strSkills + experiencias.data[index].titulo_expe + ' ' + experiencias.data[index].actividades
+        }
+      }
+      // Obtener conocimientos
+      const { data: perfil } = await this.$axios.get(`/aspirantes/${id_aspirante}`)
+      strSkills = strSkills + ' ' + perfil.conocimientos
+      strSkills = strSkills.replace(/\n/g, ' ')
+      // console.log(strSkills)
       const { data } = await this.$axios.get('vacantes?$eager=organizacion', { params: { activo: 1 } })
       this.items = data.data.map(i => ({
         ...i,
-        updatedAt: myDateFormat(i.updatedAt.replace('-', '/').split('T')[0])
+        updatedAt: myDateFormat(i.updatedAt.replace('-', '/').split('T')[0]),
+        strVacante: i.descripcion + ' ' + i.requisitos,
+        similitud: 0
       }))
       if (this.items.length === 0) this.items = null
+      else {
+        for (let index = 0; index < this.items.length; index++) {
+          this.items[index].similitud = stringSimilarity.compareTwoStrings(strSkills, this.items[index].strVacante)
+          console.log(this.items[index].similitud)
+        }
+        // Ordenar por relevancia
+        this.items.sort(function (a, b) {
+          if (a.similitud < b.similitud) {
+            return 1
+          }
+          if (a.similitud > b.similitud) {
+            return -1
+          }
+          return 0
+        })
+      }
     }
   }
 }
