@@ -42,7 +42,7 @@
             style="min-width:300px"
           /-->
 
-          <q-input outlined label='Contraseña' v-model="password" :type="!showPassword ? 'password' : 'text'" hint="Contraseña"
+          <q-input outlined label='Nueva contraseña' v-model="password" :type="!showPassword ? 'password' : 'text'" hint="Si desea cambiar la contraseña, ingresela aquí"
             style="min-width:300px;"
           >
             <template v-slot:append>

@@ -5,6 +5,14 @@ const routes = [
     component: () => import('layouts/AppLayout.vue'),
     children: [
       { path: '', component: () => import('pages/index.vue') },
+      {
+        path: 'admin/empresas',
+        component: () => import('layouts/CrudLayout.vue'),
+        children: [
+          { path: '', component: () => import('pages/admin/lista.vue') },
+          { path: 'crear', component: () => import('pages/admin/crear.vue') }
+        ]
+      },
       { path: 'perfil', component: () => import('pages/aspirantes/perfil.vue') },
       {
         path: 'aspirante/experiencias-laborales',

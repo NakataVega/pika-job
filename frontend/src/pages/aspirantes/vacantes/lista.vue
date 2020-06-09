@@ -87,19 +87,26 @@ export default {
     if (!this.$store.state.user.id_aspirante) this.$router.push('/404')
     else {
       const id_aspirante = this.$store.state.user.id_aspirante
+      var strSkills = ''
       // Obtener cadena de las experiencias
       var { data: experiencias } = await this.$axios.get('experiencias-laborales?', { params: { id_user: id_aspirante } })
-      var strSkills = ''
       if (experiencias.total !== 0) {
         for (let index = 0; index < experiencias.data.length; index++) {
-          strSkills = strSkills + experiencias.data[index].titulo_expe + ' ' + experiencias.data[index].actividades
+          strSkills = strSkills + experiencias.data[index].titulo_expe + ' ' + experiencias.data[index].actividades + ' '
+        }
+      }
+      // Obtener programas educativos
+      var { data: formaciones } = await this.$axios.get('formaciones-academicas?', { params: { id_user: id_aspirante } })
+      if (formaciones.total !== 0) {
+        for (let index = 0; index < formaciones.data.length; index++) {
+          strSkills = strSkills + formaciones.data[index].titulo_formacion + ' '
         }
       }
       // Obtener conocimientos
       const { data: perfil } = await this.$axios.get(`/aspirantes/${id_aspirante}`)
-      strSkills = strSkills + ' ' + perfil.conocimientos
+      strSkills = strSkills + ' ' + (perfil.conocimientos || '')
       strSkills = strSkills.replace(/\n/g, ' ')
-      // console.log(strSkills)
+      console.log(strSkills)
       const { data } = await this.$axios.get('vacantes?$eager=organizacion', { params: { activo: 1 } })
       this.items = data.data.map(i => ({
         ...i,

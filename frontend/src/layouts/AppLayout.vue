@@ -24,7 +24,15 @@
       content-class="bg-grey-9"
     >
       <q-list>
-        <template v-if="$store.state.user.id_aspirante">
+        <template v-if="$store.state.user.admin === 1">
+          <q-item clickable to="/admin/empresas" v-ripple>
+            <q-item-section avatar>
+              <q-icon color="yellow-14" name="library_add" />
+            </q-item-section>
+            <q-item-section style="color:#ffd500; font-weight:bold;">Empresas</q-item-section>
+          </q-item>
+        </template>
+        <template v-else-if="$store.state.user.id_aspirante">
           <q-item clickable to="/perfil" v-ripple>
             <q-item-section avatar>
               <q-icon color="yellow-14" name="person" />
@@ -63,7 +71,7 @@
           </q-item>
         </template>
         <!--ORGANIZACIONES-->
-        <template v-if="$store.state.user.id_organizacion">
+        <template v-else-if="$store.state.user.id_organizacion">
           <q-item clickable to="/tus-vacantes" v-ripple>
             <q-item-section avatar>
               <q-icon color="yellow-14" name="dashboard"/>

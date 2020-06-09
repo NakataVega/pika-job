@@ -176,10 +176,10 @@ export default {
         else this.localidad = this.localidad + this.datoPers.estado + ', '
         if (this.datoPers.pais === '') this.datoPers.pais = null
         else this.localidad = this.localidad + this.datoPers.pais + '.'
-        if (this.datoPers.conocimientos === '') this.datoPers.conocimientos = null
+        if (this.datoPers.conocimientos === '' || !this.datoPers.conocimientos) this.datoPers.conocimientos = null
         else this.datoPers.conocimientos = this.datoPers.conocimientos.split('\n')
         if (this.datoPers.fecha_naci === '') this.datoPers.fecha_naci = null
-        if (this.datoPers.referencias === '') this.datoPers.referencias = null
+        if (this.datoPers.referencias === '' || !this.datoPers.referencias === '') this.datoPers.referencias = null
         else this.datoPers.referencias = this.datoPers.referencias.split('\n')
         if (this.datoPers.telefono === '') this.datoPers.telefono = null
         if (this.datoPers.imagen === '' || !this.datoPers.imagen) this.datoPers.imagen = '0.png'
