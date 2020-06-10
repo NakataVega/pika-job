@@ -15,6 +15,10 @@
           :data="items"
           :columns="columns"
           hide-header
+          virtual-scroll
+          :virtual-scroll-item-size="this.items.length"
+          :pagination="pagination"
+          :rows-per-page-options="[0]" hide-bottom
         >
           <template v-slot:item="props">
             <div class="q-pa-xs col-xs-12 col-sm-4 col-md-4">
@@ -80,7 +84,10 @@ export default {
     if (!this.$store.state.user.id_aspirante) this.$router.push('/404')
     return {
       items: [],
-      columns: []
+      columns: [],
+      pagination: {
+        rowsPerPage: 0
+      }
     }
   },
   async mounted () {

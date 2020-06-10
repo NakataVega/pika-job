@@ -111,13 +111,14 @@ export default {
       this.items = data.data.map(i => ({
         ...i,
         updatedAt: myDateFormat(i.updatedAt.replace('-', '/').split('T')[0]),
-        strVacante: i.descripcion + ' ' + i.requisitos,
+        strVacante: i.nombre_vacante + ' ' + i.descripcion + ' ' + i.requisitos,
         similitud: 0
       }))
       if (this.items.length === 0) this.items = null
       else {
         for (let index = 0; index < this.items.length; index++) {
           this.items[index].similitud = stringSimilarity.compareTwoStrings(strSkills, this.items[index].strVacante)
+          console.log(this.items[index].nombre_vacante)
           console.log(this.items[index].similitud)
         }
         // Ordenar por relevancia
