@@ -54,6 +54,7 @@
     "feathers-blob": "^2.2.0",
     "feathers-objection": "^4.8.1",
     "fs-blob-store": "^5.2.1",
+    "fuse.js": "^6.0.4",
     "helmet": "^3.21.3",
     "knex": "^0.20.10",
     "moment": "^2.24.0",

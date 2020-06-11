@@ -51,6 +51,18 @@
 <script>
 var stringSimilarity = require('string-similarity')
 
+const palabrasNoValidas = [
+  'de', 'al', 'a', 'que', 'para', 'el', 'lo', 'la', 'les', 'y', 'con', 'del', 'le', 'u', 'o', 'como', 'las', 'los', 'sin', 'en', 'así'
+]
+
+function limpiaCadena (cadena) {
+  cadena = cadena.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+  cadena = cadena.replace(/-/g, '').split(' ').filter(palabra => {
+    const value = palabra.toLowerCase().trim().replace(/,?\n?-/g, '')
+    return value && !palabrasNoValidas.includes(value)
+  }).join(' ')
+  return cadena
+}
 function toMonth (number) {
   if (number === 1) return 'Enero'
   if (number === 2) return 'Febrero'
@@ -106,6 +118,7 @@ export default {
       const { data: perfil } = await this.$axios.get(`/aspirantes/${id_aspirante}`)
       strSkills = strSkills + ' ' + (perfil.conocimientos || '')
       strSkills = strSkills.replace(/\n/g, ' ')
+      strSkills = limpiaCadena(strSkills)
       console.log(strSkills)
       const { data } = await this.$axios.get('vacantes?$eager=organizacion', { params: { activo: 1 } })
       this.items = data.data.map(i => ({
@@ -117,7 +130,7 @@ export default {
       if (this.items.length === 0) this.items = null
       else {
         for (let index = 0; index < this.items.length; index++) {
-          this.items[index].similitud = stringSimilarity.compareTwoStrings(strSkills, this.items[index].strVacante)
+          this.items[index].similitud = stringSimilarity.compareTwoStrings(strSkills, limpiaCadena(this.items[index].strVacante))
           console.log(this.items[index].nombre_vacante)
           console.log(this.items[index].similitud)
         }
